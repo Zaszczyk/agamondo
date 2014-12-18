@@ -15,9 +15,21 @@
 <body>
     <div class="heading">
         <div class="heading-button">
-            <a href="">
-                <button>Zaloguj się</button>
-            </a>
+            <?php
+            if ($this->action == 'login') {
+                ?>
+                <a href="">
+                    <button>Rejestracja</button>
+                </a>
+            <?php
+            } else {
+                ?>
+                <a href="">
+                    <button>Zaloguj się</button>
+                </a>
+            <?php
+            }
+            ?>
         </div>
 
         <ul class="social">
