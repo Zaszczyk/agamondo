@@ -11,9 +11,10 @@ class AuthController extends Controller{
         if(isset($_POST['login']) && isset($_POST['password'])){
 
             $AuthModel = $this->loadModel('AuthModel');
-
+            echo 'a';
             try{
                 $result = $AuthModel->Login($_POST['login'], $_POST['password']);
+                echo 'b';
             }
             catch(PDOException $e){
                 Functions::logger('PDO', $e);

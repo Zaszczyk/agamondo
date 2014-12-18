@@ -33,9 +33,10 @@ class Functions{
      * @return
      */
     public static function logger($type, $e){
+        echo $e;
         $resp['type'] = 1;
         $resp['text'] = 'Wystąpił błąd';
-        mail(Config::ERROR_EMAIL, 'Wystąpił błąd na stronie '.Config::PATH, $e);
+        //mail(Config::ERROR_EMAIL, 'Wystąpił błąd na stronie '.Config::PATH, $e);
         return $resp;
     }
 
