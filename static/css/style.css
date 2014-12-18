@@ -151,6 +151,7 @@ button:hover{
 }
 #mainafterlogin-heading{
     border-bottom: 2px solid #FEC63E;
+
 }
 .social{
     float:right;
@@ -189,6 +190,7 @@ button:hover{
     color: #2C4143;
     font-family: 'Audiowide', sans-serif;
     float:left;
+    margin-left: 60px;
 }
 .logo h1 span{
     font-size: 39px;
@@ -227,6 +229,8 @@ button:hover{
     position:absolute;
     right:80px;
     display:block;
+    z-index:30;
+
 }
 .user-nav > li > h3{
     color: #2C4143;
@@ -240,6 +244,7 @@ button:hover{
     vertical-align: middle;
     position: relative;
     clear:both;
+
 }
 .user-nav > li  > ul{
     position:absolute;
@@ -251,12 +256,14 @@ button:hover{
     list-style-type:none;
     border: 1px solid #d3d3d3;
     border-top: none;
+    z-index: 99;
 
 }
 .user-nav > li > ul > li{
     height:40px;
     width:180px;
     padding: 10px 20px;
+    background-color: #ffffff;
 }
 .user-nav > li > ul > li > a{
     color: #040404;
@@ -271,6 +278,8 @@ button:hover{
 }
 .user-nav > li:hover ul{
     display:block;
+
+
 }
 #avatar:after{
     height:10px;
@@ -306,7 +315,16 @@ button:hover{
     width:60px;
     display: inline-block;
     margin-top:10px;
-
+}
+.avatar-activity img{
+    border-radius: 50%;
+}
+.avatar-activity{
+    margin-left:50px;
+    height:100px;
+    width:100px;
+    display: inline-block;
+    margin-top:30px;
 }
 
 .avatar-training:after{
@@ -397,6 +415,8 @@ section h3 span{
     color: #FEC63E;
 }
 #mainafterlogin{
+    postion:relative;
+    z-index: 99;
 
 }
 #mainafterlogin-content{
@@ -460,6 +480,132 @@ section h3 span{
     float:right;
     margin:-90px 200px 0px 0px;
 }
+#map_canvas{
+    width: 88%;
+    height: 60%;
+    margin: 30px 0px 0px 80px;
+    border:1px solid gainsboro;
+}
+.activity{
+    width:100%;
+    padding:100px 80px 0px 80px;
+    z-index: 1;
+}
+.activity-header{
+    width:100%;
+    background-color: #2C4143 ;
+    border:1px solid gainsboro;
+    border-bottom: none;
+
+}
+.activity-header h3{
+    padding: 10px 0 10px 10px;
+    color:#FEFEFE;
+    font-size:24px;
+}
+.activity-content{
+    width:100%;
+    min-height:180px;
+    border:1px solid gainsboro;
+}
+.activity-content:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+}
+.activity-content-left{
+    width:46%;
+    float:left;
+    min-height: 180px;
+}
+.activity-content-left a{
+    color:#808080;
+    padding: 0 0 0 180px;
+}
+.activity-content-left h4{
+    margin: -80px 0 6px 180px;
+    color:#2C4143;
+}
+.activity-content-left a:hover{
+    text-decoration: underline;
+}
+.activity-content-right{
+    border-left: 1px solid gainsboro;
+    width:54%;
+    height:100%;
+    float:right;
+    padding: 40px 0 0 20px;
+    min-height: 180px;
+}
+.activity-content-right h3{
+    font-size:24px;
+    color: #040404;
+}
+.activity-content-right h6{
+    color: #808080;
+    margin-top: -3px;
+    font-size:13px;
+}
+.activity-content-right-distance h3:before,
+.activity-content-right-calories h3:before,
+.activity-content-right-time h3:before{
+    height: 40px;
+    width: 40px;
+    content: "";
+    display: block;
+    float:left;
+    margin:0px 10px 0 0;
+    background-color: #FEC63E;
+    border-radius: 50%;
+
+}
+.activity-content-right-distance{
+    float:left;
+    width:33%;
+}
+.activity-content-right-time{
+    float:left;
+    width:33%;
+}
+.activity-content-right-calories{
+    float:left;
+    width:33%;
+}
+.activity-content-right-button{
+    clear:both;
+    text-align: center;
+    width: 100%;
+    padding:30px 0;
+}
+.activity-content-right-more{
+    background-color: #f5f5f5;
+    margin-left: -20px;
+    padding: 20px;
+}
+.activity-content-right-more:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+}
+.activity-content-right-more-speed {
+    text-align: center;
+    float:right;
+    width:40%;
+    text-align: left;
+}
+.activity-content-right-more-label{
+    float:left;
+}
+.activity-content-right-more-label h3{
+    font-size:18px;
+}
+.activity-content-right-more-speed h4{
+    font-size:18px;
+    font-style: oblique;
+}
+
 #mainpage1{
     background: url("themes/base/images/3.jpg");
     background-size: cover;
@@ -663,8 +809,12 @@ label{
 
 /* FOOTER*/
 footer {
-    height: 0px;
-    margin-top: -20px;
+    height: 30px;
+    width: 100%;
     background: #2C4143;
     color:#E6E7E8;
+    margin-top:30px;
+    text-align: center;
+    font-family: sans-serif;
+    padding-top:5px;
 }

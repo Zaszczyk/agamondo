@@ -1,0 +1,86 @@
+<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+  <Activities>
+    <Activity Sport="Running">
+      <Id>2014-05-22T17:40:25Z</Id>
+      <Lap StartTime="2014-02-15T11:04:26Z">
+        <TotalTimeSeconds>11725.0</TotalTimeSeconds>
+        <DistanceMeters>74206.00128173828</DistanceMeters>
+        <Calories>4494</Calories>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:02:34 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7444081</LatitudeDegrees>
+							<LongitudeDegrees>19.4723486</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:02:43 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7444081</LatitudeDegrees>
+							<LongitudeDegrees>19.4723486</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:02:49 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7444081</LatitudeDegrees>
+							<LongitudeDegrees>19.4723486</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:02:54 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7444081</LatitudeDegrees>
+							<LongitudeDegrees>19.4723486</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:02:59 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7444081</LatitudeDegrees>
+							<LongitudeDegrees>19.4723486</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:03:06 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7432504</LatitudeDegrees>
+							<LongitudeDegrees>19.4751615</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:03:15 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7433274</LatitudeDegrees>
+							<LongitudeDegrees>19.4751182</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:03:21 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.7432864</LatitudeDegrees>
+							<LongitudeDegrees>19.4751103</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:03:29 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.74317294</LatitudeDegrees>
+							<LongitudeDegrees>19.4743564</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+				<Trackpoint>
+					<Time>Mon Dec 15 11:03:34 CET 2014</Time>
+						<Position>
+							<LatitudeDegrees>51.74317294</LatitudeDegrees>
+							<LongitudeDegrees>19.4743564</LongitudeDegrees>
+						</Position>
+				</Trackpoint>
+			</Track>
+        </Lap>
+      </Activity>
+    </Activities>
+  </TrainingCenterDatabase>

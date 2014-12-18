@@ -20,7 +20,7 @@ function initialize(nazwaMapy,nazwaPliku) {
 
             var poly = new google.maps.Polyline({
                 path: points,
-                strokeColor: "#5D66DS",
+                strokeColor: "#EF3038",
                 strokeOpacity: .7,
                 strokeWeight: 4
             });
