@@ -14,27 +14,7 @@ class MainController extends Controller{
     }
 
     public function index($page = null, $resp = null){
-        $AnswerModel = $this->loadModel('AnswerModel');
         $this->NoCSRFToken = NoCSRF::generate(Config::NOCSRF_SESSION_VARIABLE);
-
-        if($_POST['max'])
-            $max = (int)$_POST['max'];
-        else if($_SESSION['max'])
-            $max = $_SESSION['max'];
-        else
-            $max = 20;
-
-        $_SESSION['max'] = $max;
-
-        if(is_numeric($page)){
-            $from = ($page-1) * $max;
-        }
-        else{
-            $from = 0;
-            $page = 1;
-        }
-
-
 
 
         require 'application/views/main/index.phtml';
