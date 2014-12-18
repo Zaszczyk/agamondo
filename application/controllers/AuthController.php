@@ -122,6 +122,50 @@ class AuthController extends Controller{
         require 'application/views/auth/login.phtml';
     }
 
+    private function _registerValidation($post){
+        $loginL = mb_strlen($post['login']);
+
+        if($loginL < 1 || $loginL > 32)
+            throw new Exception('Login może mieć 1-32 znaków.');
+
+        if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL))
+            throw new Exception('Podany e-mail jest nieprawidłowy.');
+
+        $AuthModel = $this->LoadModel('AuthModel');
+
+        if($AuthModel->checkEmail($post['email']) !== false)
+            throw new Exception('Istnieje już użytkownik o podanym adresie e-mail.');
+
+        if($AuthModel->checkLogin($post['login']) !== false)
+            throw new Exception('Istnieje już użytkownik o podanym loginie.');
+
+        if($post['password1'] != $post['password2'])
+            throw new Exception('Hasła nie są takie same');
+
+        return $AuthModel;
+    }
+
+
+    public function register(){
+        if(isset($_POST)){
+            try{
+                $AuthModel = $this->_registerValidation($_POST);
+                $AuthModel->register($_POST['login'], $_POST['email']. $_POST['password']);
+
+            }
+            catch(PDOException $e){
+                Functions::logger('PDO', $e);
+            }
+            catch(Exception $e){
+                $resp['type'] = 0;
+                $resp['text'] = $e->getMessage();
+            }
+
+        }
+
+        require 'application/views/auth/register.phtml';
+    }
+
     private function _sendEmail($email, $subject, $body){
         $headers = "MIME-Version: 1.0\n"; //naglowki odpowiadajce za wyswietlanie html
         $headers .= "Content-type: text/html; charset=utf-8\n";

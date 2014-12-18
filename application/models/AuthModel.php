@@ -85,7 +85,8 @@ class AuthModel extends Model{
 
 
     public function checkLogin($login){
-        $query = $this->_Db->prepare('SELECT id FROM users WHERE login= :login LIMIT 1');
+        $login = mb_strtolower($login);
+        $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
         $query->execute();
         $result = $query->fetch();
@@ -97,6 +98,8 @@ class AuthModel extends Model{
     }
 
     public function checkEmail($email){
+        $email = mb_strtolower($email);
+
         $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(email)= :email LIMIT 1');
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->execute();
@@ -108,26 +111,20 @@ class AuthModel extends Model{
             return false;
     }
 
-    public function addUser($login, $email, $password, $name){
+    public function register($login, $email, $password){
         $options = array(
             'cost' => 9,
         );
 
         $password = password_hash($password, PASSWORD_BCRYPT, $options);
 
-        $query = $this->_Db->prepare('INSERT INTO users(login, email, password, date_register, name) VALUES(:login, :email, :password, NOW(), :name)');
+        $query = $this->_Db->prepare('INSERT INTO users(login, email, password, date_register) VALUES(:login, :email, :password, NOW())');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
-        $query->bindParam(':name', $name, PDO::PARAM_STR);
         $query->execute();
     }
 
-    public function deleteUser($id){
-        $query = $this->_Db->prepare('DELETE FROM users WHERE id= :id LIMIT 1');
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
-        $query->execute();
-    }
 
     public function getIdFromEmail($emailLower){
         $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(email)= :email LIMIT 1');
@@ -164,11 +161,6 @@ class AuthModel extends Model{
         $query->execute();
     }
 
-    public function getAllUsers(){
-        $query = $this->_Db->prepare('SELECT id, login, email, name, date_register FROM users ORDER BY name ASC');
-        $query->execute();
-        return $query->fetchAll();
-    }
 
     public function logout(){
         $_SESSION['logged'] = false;
@@ -177,6 +169,7 @@ class AuthModel extends Model{
         session_regenerate_id(true);
         $_SESSION = array();
     }
+
 
     private function _addUserLogging($login, $success){
 
