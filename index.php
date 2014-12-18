@@ -1,7 +1,8 @@
 <?php
 ob_start();
 session_start();
-ini_set('display_errors', 0);
+error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', 1);
 require_once 'application/libs/Config.class.php';
 require_once 'application/libs/Functions.class.php';
 

@@ -16,8 +16,6 @@ class Controller{
         else
             require 'application/views/layouts/header_unlogged.phtml';
 
-
-
     }
 
     /**
