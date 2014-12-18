@@ -27,7 +27,7 @@ class AuthController extends Controller{
             $resp['text'] = 'Podałeś nieprawidłowe dane';
         }
 
-        require 'application/views/auth/login.phtml';
+        require 'application/views/main/index.phtml';
     }
 
     public function forgetPassword(){

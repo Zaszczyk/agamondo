@@ -607,7 +607,7 @@ section h3 span{
 }
 
 #mainpage1{
-    background: url("themes/base/images/3.jpg");
+    background: url("../img/3.jpg");
     background-size: cover;
     border-top: 2px solid #FEC63E;
     margin-top: 60px;
@@ -622,7 +622,7 @@ section h3 span{
     margin-top:10px;
 }
 #mainpage2 {
-    background: url("themes/base/images/2.jpg");
+    background: url("../img/2.jpg");
     background-size: cover;
     display: table;
 }
@@ -673,22 +673,22 @@ section h3 span{
     animation: bounce 2s infinite;
 }
 #mainpage3 {
-    background: url("themes/base/images/3.jpg");
+    background: url("../img/3.jpg");
     background-size: cover;
 }
 #mainpage4 {
-    background: url("themes/base/images/3.jpg");
+    background: url("../img/3.jpg");
     background-size: cover;
 }
 #mainpage5 {
-    background: url("themes/base/images/3.jpg");
+    background: url("../img/3.jpg");
     background-size: cover;
 }
 /* LOGIN AND SIGN UP PAGE */
 #login, #signup{
     height: 100vh;
     width: 100%;
-    background: url("themes/base/images/11.jpg");
+    background: url("../img/11.jpg");
     background-size: cover;
     display: table;
 }

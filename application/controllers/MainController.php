@@ -14,42 +14,8 @@ class MainController extends Controller{
     }
 
     public function index($page = null, $resp = null){
-        $AnswerModel = $this->loadModel('AnswerModel');
         $this->NoCSRFToken = NoCSRF::generate(Config::NOCSRF_SESSION_VARIABLE);
 
-        if($_POST['max'])
-            $max = (int)$_POST['max'];
-        else if($_SESSION['max'])
-            $max = $_SESSION['max'];
-        else
-            $max = 20;
-
-        $_SESSION['max'] = $max;
-
-        if(is_numeric($page)){
-            $from = ($page-1) * $max;
-        }
-        else{
-            $from = 0;
-            $page = 1;
-        }
-
-        try{
-            $result = $AnswerModel->getAnswers($from, $max);
-            $countAnswers = $AnswerModel->getAnswersCounter();
-            $answersToday = $AnswerModel->getAnswersCounter('today');
-            $answersYesterday = $AnswerModel->getAnswersCounter('yesterday');
-            $rows = count($result);
-
-            if($from > 0)
-                $maxPages = round(($countAnswers/$max), 0, PHP_ROUND_HALF_UP);
-            else
-                $maxPages = round(($countAnswers/$max), 0, PHP_ROUND_HALF_UP);
-
-        }
-        catch(PDOException $e){
-            Functions::logger('PDO', $e);
-        }
 
 
         require 'application/views/main/index.phtml';
