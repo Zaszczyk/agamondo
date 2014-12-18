@@ -34,22 +34,7 @@ class MainController extends Controller{
             $page = 1;
         }
 
-        try{
-            $result = $AnswerModel->getAnswers($from, $max);
-            $countAnswers = $AnswerModel->getAnswersCounter();
-            $answersToday = $AnswerModel->getAnswersCounter('today');
-            $answersYesterday = $AnswerModel->getAnswersCounter('yesterday');
-            $rows = count($result);
 
-            if($from > 0)
-                $maxPages = round(($countAnswers/$max), 0, PHP_ROUND_HALF_UP);
-            else
-                $maxPages = round(($countAnswers/$max), 0, PHP_ROUND_HALF_UP);
-
-        }
-        catch(PDOException $e){
-            Functions::logger('PDO', $e);
-        }
 
 
         require 'application/views/main/index.phtml';
@@ -117,6 +102,7 @@ class MainController extends Controller{
 
         $this->password($resp);
     }
+
     public function settings($resp = null){
         $this->NoCSRFToken = NoCSRF::generate(Config::NOCSRF_SESSION_VARIABLE);
         require 'application/views/main/settings.phtml';
@@ -130,66 +116,6 @@ class MainController extends Controller{
         require 'application/views/main/adduser.phtml';
     }
 
-    public function addingUser(){
-        try{
-            NoCSRF::check(Config::NOCSRF_SESSION_VARIABLE, $_POST, true, Config::NOCSRF_TOKEN_TIMEOUT);
-        }
-        catch(NoCSRFException $e){
-            $resp['type'] = 0;
-            $resp['text'] = 'Nieprawidłowy token bezpieczeństwa, spróbuj ponownie.';
-            $this->addUser($resp);
-            return false;
-        }
-
-        $resp['type'] = 1;
-        $resp['text'] = 'Wystąpił błąd';
-
-        $AuthModel = $this->loadModel('AuthModel');
-        $loginL = strlen($_POST['login']);
-        $passwordL = strlen($_POST['password1']);
-        $loginL = strlen($_POST['login']);
-
-        if($loginL < 5 || $loginL > 40){
-            $resp['text'] = 'Login musi mieć 5-40 znaków';
-            $resp['type'] = 0;
-        }
-        elseif($_POST['password1'] != $_POST['password2']){
-            $resp['text'] = 'Hasła nie są takie same.';
-            $resp['type'] = 0;
-        }
-        elseif($passwordL < 6){
-            $resp['text'] = 'Hasło musi mieć co najmniej 6 znaków';
-            $resp['type'] = 0;
-        }
-
-
-        try{
-            if($AuthModel->checkLogin($_POST['login'])){
-                $resp['text'] = 'Istnieje już użytkownik o takim loginie.';
-                $resp['type'] = 0;
-            }
-        }
-        catch(PDOException $e){
-            Functions::logger('PDO', $e);
-        }
-
-        if($resp['type'] == 0){
-            $this->addUser($resp, $_POST);
-            return true;
-        }
-
-        try{
-            $result = $AuthModel->addUser($_POST['login'], $_POST['email'], $_POST['password1'], $_POST['name']);
-            $resp['type'] = 1;
-            $resp['text'] = 'Użytkownik został dodany.';
-        }
-        catch(PDOException $e){
-            Functions::logger('PDO', $e);
-        }
-
-
-        $this->addUser($resp);
-    }
 
     public function deleteUser(){
         try{

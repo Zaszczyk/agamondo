@@ -16,22 +16,6 @@ class Controller{
         else
             require 'application/views/layouts/header_unlogged.phtml';
 
-
-        //sprawdzenie daty
-        $SettingsModel = $this->LoadModel('SettingsModel');
-        $settings = $SettingsModel->getSettings();
-
-        $Now = new DateTime('now');
-        $StartCompetition = new DateTime($settings['start']);
-        $StopCompetition = new DateTime($settings['stop']);
-
-        if($Now > $StartCompetition && $settings['status'] == 1){
-            $SettingsModel->setStatus(2);
-        }
-        if($Now > $StopCompetition && $settings['status'] == 2){
-            $SettingsModel->setStatus(3);
-        }
-
     }
 
     /**

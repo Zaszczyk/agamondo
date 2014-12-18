@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 require_once 'application/libs/Config.class.php';
 require_once 'application/libs/Functions.class.php';
 
