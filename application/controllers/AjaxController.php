@@ -12,9 +12,13 @@ class AjaxController extends Controller{
         $this->OpenDatabaseConnection();
     }
 
+    public function getTrainingXml(){
+        $TrainingModel = $this->LoadModel('TrainingModel');
+        return $TrainingModel->getTrainingXml($_POST['id']);
+    }
 
     public function __destruct(){
-
+        //echo json_encode();
     }
 
 }

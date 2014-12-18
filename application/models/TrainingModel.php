@@ -78,5 +78,13 @@ class TrainingModel extends Model{
         // fetch() is the PDO method that get exactly one result
         return $query->fetch()->amount_of_training;
     }
+
+    public function getTrainingXml($id){
+        $query = $this->_Db->prepare('SELECT xml FROM trainings WHERE id= :id AND user_id= :uid LIMIT 1');
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':uid',$_SESSION['id']);
+        $query->execute();
+        return $query->fetch();
+    }
 }
 ?>

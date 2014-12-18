@@ -145,13 +145,13 @@ class AuthController extends Controller{
         return $AuthModel;
     }
 
-
     public function register(){
-        if(isset($_POST)){
+        if(!empty($_POST)){
+            $value = $_POST;
             try{
                 $AuthModel = $this->_registerValidation($_POST);
-                $AuthModel->register($_POST['login'], $_POST['email']. $_POST['password']);
-
+                $AuthModel->register($_POST['login'], $_POST['email'], $_POST['password1']);
+                header('Location: '.Config::PATH.'auth/login/');
             }
             catch(PDOException $e){
                 Functions::logger('PDO', $e);
@@ -160,7 +160,6 @@ class AuthController extends Controller{
                 $resp['type'] = 0;
                 $resp['text'] = $e->getMessage();
             }
-
         }
 
         require 'application/views/auth/register.phtml';

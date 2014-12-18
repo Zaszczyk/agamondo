@@ -7,8 +7,13 @@
                         <h3>Rejestracja</h3>
                     </a>
                 </div>
-                <input type="text" placeholder="Nazwa użytkownika" id="username" name="login">
-                <input type="text" placeholder="Twój email" id="email" name="email">
+                <?php
+                    echo '<pre>';
+                    print_r($resp);
+                    echo '</pre>';
+                ?>
+                <input type="text" placeholder="Nazwa użytkownika" id="username" name="login" value="<?php echo $value['login'];?>">
+                <input type="text" placeholder="Twój email" id="email" name="email" value="<?php echo $value['email'];?>">
                 <input type="password" placeholder="Hasło" id="password" name="password1">
                 <input type="password" placeholder="Powtórz Hasło" id="password2" name="password2">
                 <div class="form-footer">
