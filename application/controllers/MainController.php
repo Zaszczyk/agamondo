@@ -17,7 +17,7 @@ class MainController extends Controller{
         $this->NoCSRFToken = NoCSRF::generate(Config::NOCSRF_SESSION_VARIABLE);
 
 
-        require 'application/views/main/index.phtml';
+        require 'application/views/main/index_logged.phtml';
     }
 
     public function deleteAnswer($page){

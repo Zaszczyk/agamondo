@@ -7,52 +7,74 @@
     <link rel="stylesheet" href="static/css/reset.css">
     <link rel="stylesheet" href="static/css/1200gs.css">
     <link rel="stylesheet" href="static/css/style.css">
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/main.js"></script>
-
+    <script type="text/javascript" src="static/js/tcx.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Comfortaa&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            initialize('map', 'static/trasa.tcx');
+            initialize('map2', 'static/trasa.tcx');
+            initialize('map3', 'static/trasa.tcx');
+        });
+    </script>
 </head>
 <body>
-<div id="container">
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container"><a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                        class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </a><a class="brand" href="index.html">Panel Administratora do zarządzania konkursem </a>
-
-                <div class="nav-collapse">
-                    <ul class="nav pull-right">
-
-                        <li class="dropdown">
-                            <a href="<?php echo Config::PATH; ?>main/logout">Wyloguj</a>
+    <div id="mainafterlogin">
+        <div id="mainafterlogin-heading" class="heading">
+            <ul class="user-nav">
+                <li>
+                    <h3>Witaj, Kamil</h3>
+                </li>
+                <li id="avatar-li">
+                    <a id="avatar-a" href="#">
+                        <div id="avatar">
+                            <img src="static/img/avatar.jpg" alt="avatar">
+                        </div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="@"> <div>Dodaj trening</div></a>
+                        </li>
+                        <li>
+                            <a href="@"><div>Edytuj profil</div></a>
+                        </li>
+                        <li>
+                            <a href="<?php /*echo Config::PATH; */?>main/logout"><div>Wyloguj</div></a>
                         </li>
                     </ul>
-
-                </div>
-                <!--/.nav-collapse -->
-            </div>
-            <!-- /container -->
+                </li>
+            </ul>
+            <a class="logo" href="/">
+                <h1><span>AGA</span>MONDO</h1>
+            </a>
+            <ul class="global-nav">
+                <li>
+                    <a href="@">Statystyki</a>
+                </li>
+                <li>
+                    <a href="@">Treningi</a>
+                </li>
+                <li>
+                    <a href="@">Kalendarz</a>
+                </li>
+                <li>
+                    <a href="@">Wyzwania</a>
+                </li>
+            </ul>
         </div>
-        <!-- /navbar-inner -->
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-        <div class="subnavbar-inner">
-            <div class="container">
-                <ul class="mainnav">
-                    <li <?php if($this->Action == 'index' || $this->Action == 'deleteanswer' || $this->Action == null) echo 'class="active"'; ?>><a href="<?php echo Config::PATH; ?>"><i class="icon-list-alt"></i><span>Zgłoszenia</span> </a></li>
-                    <li <?php if($this->Menu == 'settings') echo 'class="active"'; ?>><a href="settings/display/"><i class="icon-cog"></i><span>Ustawienia</span> </a></li>
-                    <li <?php if($this->Action == 'adduser' || $this->Action == 'addinguser' || $this->Action == 'deleteuser') echo 'class="active"'; ?>><a href="main/adduser"><i class="icon-cog"></i><span>Dodaj użytkownika</span> </a></li>
-                    <li <?php if($this->Action == 'password' || $this->Action == 'changepassword') echo 'class="active"'; ?>><a href="main/password/"><i class="icon-cog"></i><span>Zmień hasło</span> </a></li>
-                    <li></li>
 
-                </ul>
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /subnavbar-inner -->
-    </div>
-    <!-- /subnavbar -->
-    <div class="main">
-        <div class="main-inner">
-            <div class="container">
+
+
+
+
+
+
+<!--<a href="<?php /*echo Config::PATH; */?>main/logout">Wyloguj</a>
+<li <?php /*if($this->Action == 'index' || $this->Action == 'deleteanswer' || $this->Action == null) echo 'class="active"'; */?>><a href="<?php /*echo Config::PATH; */?>"><i class="icon-list-alt"></i><span>Zgłoszenia</span> </a></li>
+<li <?php /*if($this->Menu == 'settings') echo 'class="active"'; */?>><a href="settings/display/"><i class="icon-cog"></i><span>Ustawienia</span> </a></li>
+<li <?php /*if($this->Action == 'adduser' || $this->Action == 'addinguser' || $this->Action == 'deleteuser') echo 'class="active"'; */?>><a href="main/adduser"><i class="icon-cog"></i><span>Dodaj użytkownika</span> </a></li>
+<li <?php /*if($this->Action == 'password' || $this->Action == 'changepassword') echo 'class="active"'; */?>><a href="main/password/"><i class="icon-cog"></i><span>Zmień hasło</span> </a></li>
+<li></li>-->
