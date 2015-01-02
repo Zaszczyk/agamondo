@@ -745,6 +745,7 @@ section h3 span{
 }
 #signup .form-footer{
     text-align:right;
+    height:60px;
 }
 .form-footer a{
     color: #2C4143;
@@ -808,13 +809,15 @@ label{
 }
 
 /* FOOTER*/
-footer {
+footer,#activity-footer {
     height: 30px;
     width: 100%;
     background: #2C4143;
     color:#E6E7E8;
-    margin-top:30px;
     text-align: center;
     font-family: sans-serif;
     padding-top:5px;
+}
+#activity-footer{
+    margin-top:30px;
 }
