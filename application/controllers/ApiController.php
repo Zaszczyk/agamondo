@@ -5,15 +5,17 @@ class ApiController extends Controller{
     public $NoCSRFToken;
 
     public function __construct(){
-        if($_POST['api_hash'] != Config::API_HASH)
-            exit;
+        //if($_POST['api_hash'] != Config::API_HASH)
+            //exit;
 
         $this->Path = dirname($_SERVER['SCRIPT_FILENAME']).'/';
         $this->OpenDatabaseConnection();
     }
 
     public function test(){
-        return 'sieeema';
+        echo 'sieeema';
+        if(isset($_POST['hash']))
+            echo ', parametr: '.$_POST['hash'];
     }
 
     public function addTraining(){
