@@ -12,6 +12,10 @@ class ApiController extends Controller{
         $this->OpenDatabaseConnection();
     }
 
+    public function test(){
+        return 'sieeema';
+    }
+
     public function addTraining(){
         $blob = fopen($this->Path.'trasa.tcx','rb');
         $distance = '7032.4';
