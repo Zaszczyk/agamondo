@@ -3,13 +3,40 @@
 class ApiController extends Controller{
 
     public $NoCSRFToken;
-
+    public $Return = false;
     public function __construct(){
         //if($_POST['api_hash'] != Config::API_HASH)
             //exit;
 
         $this->Path = dirname($_SERVER['SCRIPT_FILENAME']).'/';
         $this->OpenDatabaseConnection();
+    }
+
+    public function login(){
+        if(isset($_POST['login']) && isset($_POST['password'])){
+
+            $AuthModel = $this->loadModel('AuthModel');
+
+            try{
+                $result = $AuthModel-login($_POST['login'], $_POST['password']);
+                if($result === false){
+                    $this->Return['type'] = 0;
+                    $this->Return['text'] = 'Logowanie nie powiodło się.';
+                    return false;
+                }
+
+                $id = $AuthModel->getIdFromLogin($_POST['login']);
+                $hash = $AuthModel->addLoggedUser($id);
+                $this->Return['type'] = 0;
+                $this->Return['text'] = 'Zostałeś pomyślnie zalogowany.';
+                $this->Return['hash'] = $hash;
+            }
+            catch(PDOException $e){
+                Functions::logger('PDO', $e);
+            }
+
+
+        }
     }
 
     public function test(){
@@ -42,7 +69,8 @@ class ApiController extends Controller{
     }
 
     public function __destruct(){
-
+        if($this->Return != false)
+            echo json_encode($this->Return);
     }
 
 }

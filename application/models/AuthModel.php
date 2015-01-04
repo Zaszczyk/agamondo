@@ -134,6 +134,13 @@ class AuthModel extends Model{
         return $ret['id'];
     }
 
+    public function getIdFromLogin($login){
+        $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
+        $query->bindParam(':login', $login, PDO::PARAM_STR);
+        $query->execute();
+        return $query->fetch()->id;
+    }
+
     public function addNewRecoverPassword($uid, $hash){
         $query = $this->_Db->prepare('INSERT INTO recover_password(uid, hash, date) VALUES(:uid, :hash, NOW()) ON DUPLICATE KEY UPDATE date = NOW(), hash = :hash');
         $query->bindParam(':uid', $uid, PDO::PARAM_INT);
@@ -161,6 +168,17 @@ class AuthModel extends Model{
         $query->execute();
     }
 
+    public function addLoggedUser($id){
+        $hash = Functions::getRandomString(32);
+        $hashSha224 = hash('SHA224', $hash);
+
+        $query = $this->_Db->prepare('INSERT INTO users_logged(id, hash, first_login) VALUES(:id, :hash, NOW())');
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->bindParam(':hash', $hashSha224, PDO::PARAM_STR);
+        $query->execute();
+
+        return $hash;
+    }
 
     public function logout(){
         $_SESSION['logged'] = false;
