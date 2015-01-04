@@ -11,19 +11,20 @@ class TrainingModel extends Model{
 
     public function getAllTraining()
     {
-        $sql = "SELECT id, distance, t_time, calories FROM training";
+        $sql = "SELECT id, distance, t_time, calories FROM trainings WHERE user_id= :uid";
         $query = $this->_Db->prepare($sql);
+        $query->bindParam(':uid', $_SESSION['id']);
         $query->execute();
 
         return $query->fetchAll();
     }
 
-    public function addTraining($blob, $distance, $time, $calories)
+    public function addTraining($xml, $distance, $time, $calories)
     {
 
         $sql = "INSERT INTO trainings (xml, distance, time, calories) VALUES (:xml, :distance, :time, :calories)";
         $query = $this->_Db->prepare($sql);
-        $query->bindParam(':xml',$blob,PDO::PARAM_LOB);
+        $query->bindParam(':xml',$xml,PDO::PARAM_LOB);
         $query->bindParam(':distance',$distance);
         $query->bindParam(':time',$time);
         $query->bindParam(':calories',$calories);
@@ -32,50 +33,38 @@ class TrainingModel extends Model{
 
     public function deleteTraining($training_id)
     {
-        $sql = "DELETE FROM training WHERE id = :training_id";
+        $sql = "DELETE FROM training WHERE id = :training_id WHERE user_id= :uid";
         $query = $this->_Db->prepare($sql);
         $parameters = array(':training_id' => $training_id);
-
-        // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
+        $query->bindParam(':uid', $_SESSION['id']);
         $query->execute($parameters);
     }
 
     public function getTraining($training_id)
     {
-        $sql = "SELECT id, distance, t_time, calories FROM training WHERE id = :training_id LIMIT 1";
+        $sql = "SELECT id, distance, t_time, calories,  FROM training WHERE id = :training_id LIMIT 1";
         $query = $this->_Db->prepare($sql);
         $parameters = array(':training_id' => $training_id);
-
-        // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
         $query->execute($parameters);
 
-        // fetch() is the PDO method that get exactly one result
         return $query->fetch();
     }
 
     public function updateTraining($distance, $t_time, $calories, $training_id)
     {
-        $sql = "UPDATE training SET distance = :distance, t_time = :t_time, calories = :calories WHERE id = :training_id";
+        $sql = "UPDATE training SET distance = :distance, t_time = :t_time, calories = :calories WHERE id = :training_id AND user_id= :uid";
         $query = $this->_Db->prepare($sql);
-        $parameters = array(':distance' => $distance, ':t_time' => $t_time, ':calories' => $calories, ':training_id' => $training_id);
-
-        // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
+        $parameters = array(':distance' => $distance, ':t_time' => $t_time, ':calories' => $calories, ':training_id' => $training_id, ':uid' => $_SESSION['id']);
         $query->execute($parameters);
     }
 
     public function getAmountOfTraining()
     {
-        $sql = "SELECT COUNT(id) AS amount_of_training FROM training";
+        $sql = "SELECT COUNT(id) AS amount_of_training FROM training AND user_id= :uid";
         $query = $this->_Db->prepare($sql);
+        $query->bindParam(':uid', $_SESSION['id']);
         $query->execute();
 
-        // fetch() is the PDO method that get exactly one result
         return $query->fetch()->amount_of_training;
     }
 
