@@ -19,14 +19,21 @@ class ApiController extends Controller{
     }
 
     public function addTraining(){
-        $blob = fopen($this->Path.'trasa.tcx','rb');
+        /*
+        $xml = fopen($this->Path.'trasa.tcx','rb');
         $distance = '7032.4';
         $time = '01:12:31';
         $calories = 1100;
+        */
+        $distance = $_POST['distance'];
+        $time = $_POST['time'];
+        $calories = $_POST['calories'];
+        $xml = $_POST['xml'];
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
-            $TrainingModel->addTraining($blob, $distance, $time, $calories);
+            $TrainingModel->addTraining($xml, $distance, $time, $calories);
+            echo 'trening został zapisany';
         }
         catch(PDOException $e){
             echo $e;
