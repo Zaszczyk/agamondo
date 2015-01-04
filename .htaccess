@@ -1,4 +1,12 @@
-# Necessary to prevent problems when using a controller named "index" and having a root index.php
+<Files ~ \.(php|php5|php6|phps|inc|shtml)$>
+SetHandler fcgid-script
+    FcgidWrapper "/fcgi/agamondo/public_html/fcgid-5.5.sh" .php
+
+Options +ExecCGI
+    allow from all
+</Files>
+
+#Necessary to prevent problems when using a controller named "index" and having a root index.php
 # more here: http://httpd.apache.org/docs/2.2/content-negotiation.html
 Options -MultiViews
 

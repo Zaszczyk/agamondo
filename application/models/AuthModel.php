@@ -20,7 +20,7 @@ class AuthModel extends Model{
      */
 	public function login($login, $password){
 
-		$login = htmlspecialchars(trim($login));
+		$login = htmlspecialchars(strtolower(trim($login)));
 
         $query = $this->_Db->prepare('SELECT password FROM users WHERE login= :login LIMIT 1');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
@@ -37,7 +37,7 @@ class AuthModel extends Model{
         if($auth){
             $this->_AddUserLogging($login, true);
 
-            $query = $this->_Db->prepare('SELECT id, login, name FROM users WHERE login= :login LIMIT 1');
+            $query = $this->_Db->prepare('SELECT id, login, name FROM users WHERE LOWER(login)= :login LIMIT 1');
             $query->bindParam(':login', $login, PDO::PARAM_STR);
             $query->execute();
             $results = $query->fetch(PDO::FETCH_ASSOC);

@@ -5,20 +5,20 @@ class ApiController extends Controller{
     public $NoCSRFToken;
     public $Return = false;
     public function __construct(){
-        //if($_POST['api_hash'] != Config::API_HASH)
-            //exit;
+        if($_POST['api_hash'] != Config::API_HASH)
+            exit;
 
         $this->Path = dirname($_SERVER['SCRIPT_FILENAME']).'/';
         $this->OpenDatabaseConnection();
     }
 
     public function login(){
-        if(isset($_POST['login']) && isset($_POST['password'])){
+        if(!empty($_POST['login']) && !empty($_POST['password'])){
 
             $AuthModel = $this->loadModel('AuthModel');
 
             try{
-                $result = $AuthModel-login($_POST['login'], $_POST['password']);
+                $result = $AuthModel->login($_POST['login'], $_POST['password']);
                 if($result === false){
                     $this->Return['type'] = 0;
                     $this->Return['text'] = 'Logowanie nie powiodło się.';
@@ -36,6 +36,10 @@ class ApiController extends Controller{
             }
 
 
+        }
+        else{
+            $this->Return['type'] = 0;
+            $this->Return['text'] = 'Podaj login i hasło.';
         }
     }
 
