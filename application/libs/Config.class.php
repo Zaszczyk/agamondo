@@ -12,7 +12,6 @@ abstract class Config{
 
     const ERROR_EMAIL = 'ati_b@wp.pl';
 
-
     const DB_HOST = 'localhost';
     const DB_PORT = 3306;
     const DB_USER = 'root';

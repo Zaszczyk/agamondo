@@ -138,7 +138,8 @@ class AuthModel extends Model{
         $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
         $query->execute();
-        return $query->fetch()->id;
+        $ret = $query->fetch();
+        return $ret['id'];
     }
 
     public function addNewRecoverPassword($uid, $hash){
@@ -168,12 +169,12 @@ class AuthModel extends Model{
         $query->execute();
     }
 
-    public function addLoggedUser($id){
+    public function addLoggedUser($uid){
         $hash = Functions::getRandomString(32);
         $hashSha224 = hash('SHA224', $hash);
 
-        $query = $this->_Db->prepare('INSERT INTO users_logged(id, hash, first_login) VALUES(:id, :hash, NOW())');
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query = $this->_Db->prepare('INSERT INTO users_logged(user_id, hash, first_login) VALUES(:uid, :hash, NOW())');
+        $query->bindParam(':uid', $uid, PDO::PARAM_INT);
         $query->bindParam(':hash', $hashSha224, PDO::PARAM_STR);
         $query->execute();
 

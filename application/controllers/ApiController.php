@@ -14,24 +14,26 @@ class ApiController extends Controller{
 
     public function login(){
         if(!empty($_POST['login']) && !empty($_POST['password'])){
+            $login = strtolower($_POST['login']);
 
             $AuthModel = $this->loadModel('AuthModel');
 
             try{
-                $result = $AuthModel->login($_POST['login'], $_POST['password']);
+                $result = $AuthModel->login($login, $_POST['password']);
                 if($result === false){
                     $this->Return['type'] = 0;
                     $this->Return['text'] = 'Logowanie nie powiodło się.';
                     return false;
                 }
 
-                $id = $AuthModel->getIdFromLogin($_POST['login']);
+                $id = $AuthModel->getIdFromLogin($login);
                 $hash = $AuthModel->addLoggedUser($id);
-                $this->Return['type'] = 0;
+                $this->Return['type'] = 1;
                 $this->Return['text'] = 'Zostałeś pomyślnie zalogowany.';
                 $this->Return['hash'] = $hash;
             }
             catch(PDOException $e){
+                //TODO obsluge bledow
                 Functions::logger('PDO', $e);
             }
 
@@ -43,11 +45,6 @@ class ApiController extends Controller{
         }
     }
 
-    public function test(){
-        echo 'sieeema';
-        if(isset($_POST['hash']))
-            echo ', parametr: '.$_POST['hash'];
-    }
 
     public function addTraining(){
         /*
