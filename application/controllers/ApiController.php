@@ -5,8 +5,12 @@ class ApiController extends Controller{
     public $NoCSRFToken;
     public $Return = false;
     public function __construct(){
-        if($_POST['api_hash'] != Config::API_HASH)
+        if($_POST['api_hash'] != Config::API_HASH){
+            $this->Return['type'] = 0;
+            $this->Return['text'] = 'Nieprawidłowy parametr identyfikujący - hash.';
             exit;
+        }
+
 
         $this->Path = dirname($_SERVER['SCRIPT_FILENAME']).'/';
         $this->OpenDatabaseConnection();
