@@ -30,6 +30,7 @@ class Controller{
 
         }
         catch(PDOException $e){
+            echo $e;
             Functions::Logger('PDOException', $e);
         }
     }
