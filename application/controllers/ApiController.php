@@ -43,6 +43,13 @@ class ApiController extends Controller{
         }
     }
 
+    public function xml(){
+
+        if(isset($_POST['xml']))
+            echo 'parametr: '.$_POST['xml'];
+    }
+
+
     public function test(){
         echo 'sieeema';
         if(isset($_POST['hash']))
