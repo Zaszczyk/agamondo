@@ -58,9 +58,9 @@ class Router{
         }
         else{
             if($_SESSION['logged'] == 1){
-                require 'application/controllers/MainController.php';
-                $Main = new MainController();
-                $Main->index();
+                require 'application/controllers/TrainingController.php';
+                $Training = new TrainingController();
+                $Training->index();
             }
             else{
                 require 'application/controllers/AuthController.php';

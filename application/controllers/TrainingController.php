@@ -18,6 +18,7 @@ class TrainingController extends Controller{
 
     public function index(){
         $Results = $this->TrainingModel->getLastTraining();
+
         require 'application/views/main/index_logged.phtml';
     }
 

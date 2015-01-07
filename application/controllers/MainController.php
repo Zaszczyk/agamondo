@@ -13,13 +13,6 @@ class MainController extends Controller{
         }
     }
 
-    public function index($page = null, $resp = null){
-        $this->NoCSRFToken = NoCSRF::generate(Config::NOCSRF_SESSION_VARIABLE);
-
-
-        require 'application/views/main/index_logged.phtml';
-    }
-
     public function deleteAnswer($page){
         if(ctype_digit($_POST['id'])){
             try{
