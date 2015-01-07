@@ -138,8 +138,7 @@ class AuthModel extends Model{
         $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
         $query->execute();
-        $ret = $query->fetch();
-        return $ret['id'];
+        return $query->fetch()->id;
     }
 
     public function addNewRecoverPassword($uid, $hash){

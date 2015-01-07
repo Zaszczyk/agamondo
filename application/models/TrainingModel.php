@@ -11,7 +11,16 @@ class TrainingModel extends Model{
 
     public function getAllTraining()
     {
-        $sql = "SELECT id, distance, t_time, calories FROM trainings WHERE user_id= :uid";
+        $sql = "SELECT id, distance, time, calories FROM trainings WHERE user_id= :uid";
+        $query = $this->_Db->prepare($sql);
+        $query->bindParam(':uid', $_SESSION['id']);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+    public function getLastTraining()
+    {
+        $sql = "SELECT id, user_id, xml, title, distance, time, created FROM trainings WHERE user_id= :uid ORDER BY id DESC LIMIT 3";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':uid', $_SESSION['id']);
         $query->execute();
