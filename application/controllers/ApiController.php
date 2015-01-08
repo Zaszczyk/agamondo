@@ -18,18 +18,25 @@ class ApiController extends Controller{
 
     public function login(){
         if(!empty($_POST['login']) && !empty($_POST['password'])){
+            $loginLower = mb_strtolower($_POST['login']);
 
             $AuthModel = $this->loadModel('AuthModel');
 
             try{
-                $result = $AuthModel->login($_POST['login'], $_POST['password']);
+                $result = $AuthModel->login($loginLower, $_POST['password']);
                 if($result === false){
                     $this->Return['type'] = 0;
                     $this->Return['text'] = 'Logowanie nie powiodło się.';
                     return false;
                 }
 
-                $id = $AuthModel->getIdFromLogin($_POST['login']);
+                $id = $AuthModel->getIdFromLogin($loginLower);
+
+                if($id == null){
+                    $this->Return['type'] = 0;
+                    $this->Return['text'] = 'blad.';
+                    return false;
+                }
                 $hash = $AuthModel->addLoggedUser($id);
                 $this->Return['type'] = 0;
                 $this->Return['text'] = 'Zostałeś pomyślnie zalogowany.';
