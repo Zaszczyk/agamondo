@@ -29,9 +29,6 @@ class TrainingController extends Controller{
         }
 
         $Results = $this->TrainingModel->getTraining($id);
-        echo '<pre>';
-        print_r($Results);
-        echo '</pre>';
         require 'application/views/training/display.phtml';
     }
 

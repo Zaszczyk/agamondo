@@ -12,7 +12,21 @@
     <script type="text/javascript" src="static/js/tcx.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Comfortaa&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('.activity-content-right-more').hide();
+            $('#show-hide').click(function() {
+                if ($('.activity-content-right-more').is(':hidden')) {
+                    $('.activity-content-right-more').fadeIn(1000);
+                    $('#show-hide').html('Schowaj');
+                }
+                else if($('.activity-content-right-more').is(':visible')){
+                    $('.activity-content-right-more').fadeOut(1000);
+                    $('#show-hide').html('Pokaż więcej');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="mainafterlogin">

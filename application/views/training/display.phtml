@@ -1,0 +1,96 @@
+<script language="javascript" type="text/javascript" src="static/js/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="static/js/jquery.flot.crosshair.js"></script>
+<script type="text/javascript" src="static/js/graphs.js"></script>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        var xmls = [];
+        <?php
+            $ResultsReversed = array_reverse($Results);
+            foreach($ResultsReversed as &$training){
+                $training = preg_replace('/\s+/', '', $training);
+                echo 'xmls.push(\''.$training['xml'].'\');';
+            }
+        ?>
+
+        $('.google-map').each(function() {
+            displayMap($(this).attr('id'));
+        });
+
+
+        function displayMap(idMapy) {
+            xml = xmls.pop();
+            var map = new google.maps.Map(document.getElementById(idMapy), {
+                mapTypeId: google.maps.MapTypeId.TERRAIN
+            });
+
+            var points = [];
+            var bounds = new google.maps.LatLngBounds ();
+            $(xml).find("Position").each(function() {
+                var lat=$(this).find("LatitudeDegrees").text();
+                var lon = $(this).find("LongitudeDegrees").text();
+                var p = new google.maps.LatLng(lat, lon);
+                points.push(p);
+                bounds.extend(p);
+            });
+
+            var poly = new google.maps.Polyline({
+                path: points,
+                strokeColor: "#EF3038",
+                strokeOpacity: .7,
+                strokeWeight: 4
+            });
+
+            poly.setMap(map);
+            map.fitBounds(bounds);
+
+        }
+    });
+</script>
+<div class="activity">
+    <div class="activity-header">
+        <h3>Nazwa treningu - Rower(rodzaj aktywności)</h3>
+    </div>
+    <div class="activity-content">
+        <div class="activity-content-left">
+            <div class="avatar-activity">
+                <img src="static/img/avatar.jpg" alt="avatar">
+            </div>
+            <h4><?php echo $Results['title']; ?></h4>
+            <a href=""><?php echo $_SESSION['login']; ?></a>
+            <h6><?php echo $Results['description']; ?></h6>
+        </div>
+        <div class="activity-content-right">
+            <div class="activity-content-right-distance">
+                <h3><?php echo $Results['distance']; ?> km</h3>
+                <h6>Dystans</h6>
+            </div>
+            <div class="activity-content-right-time">
+                <h3><?php echo $Results['time']; ?></h3>
+                <h6>Czas</h6>
+            </div>
+            <div class="activity-content-right-calories">
+                <h3><?php echo $Results['calories']; ?></h3>
+                <h6>Kalorie</h6>
+            </div>
+            <div class="activity-content-right-button">
+                <button id="show-hide">Pokaż więcej</button>
+            </div>
+            <div class="activity-content-right-more">
+                <div class="activity-content-right-more-label">
+                    <h3>Prędkość średnia:</h3>
+                    <h3>Prędkość maksymalna:</h3>
+                </div>
+                <div class="activity-content-right-more-speed">
+                    <h4>28.2km/h</h4>
+                    <h4>50.2km/h</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="google-map-<?php echo $i=1;?>" class="google-map">
+</div>
+<div class="graph">
+    <div id="placeholder" class="graph-placeholder"></div>
+</div>
