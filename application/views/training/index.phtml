@@ -44,7 +44,7 @@
     });
 </script>
 <div id="mainafterlogin-content">
-    <h3>Twoje ostatnie aktywności:</h3>
+    <h3 id="mainafterlogin-training-margin">Twoje ostatnie aktywności:</h3>
 
     <?php
         if(empty($Results)){
@@ -59,7 +59,7 @@
             $i = 1;
             foreach($Results as &$training){
         ?>
-                <div id="mainafterlogin-training-margin" class="mainafterlogin-training">
+                <div class="mainafterlogin-training">
                     <div class="mainafterlogin-training-left">
                         <div class="avatar-training">
                             <img src="static/img/avatar.jpg" alt="avatar">
