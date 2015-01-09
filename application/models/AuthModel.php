@@ -20,7 +20,7 @@ class AuthModel extends Model{
      */
 	public function login($login, $password){
 
-		$login = htmlspecialchars(strtolower(trim($login)));
+		$login = htmlspecialchars(trim($login));
 
         $query = $this->_Db->prepare('SELECT password FROM users WHERE login= :login LIMIT 1');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
@@ -138,7 +138,8 @@ class AuthModel extends Model{
         $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
         $query->bindParam(':login', $login, PDO::PARAM_STR);
         $query->execute();
-        return $query->fetch()->id;
+        $ret = $query->fetch();
+        return $ret['id'];
     }
 
     public function addNewRecoverPassword($uid, $hash){
