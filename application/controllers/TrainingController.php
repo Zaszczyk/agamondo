@@ -20,6 +20,7 @@ class TrainingController extends Controller{
         $Results = $this->TrainingModel->getLastTraining();
 
         require 'application/views/main/index_logged.phtml';
+        require 'application/views/layouts/header_logged.phtml';
     }
 
     public function display($id){

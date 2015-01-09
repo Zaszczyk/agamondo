@@ -14,8 +14,10 @@
     <link href='http://fonts.googleapis.com/css?family=Comfortaa&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <script type="text/javascript">
         $( document ).ready(function() {
-            initialize('map', 'static/trasa.tcx');
-            initialize('map2', 'static/trasa.tcx');
+            initialize('map','<?php
+                    echo $Results[2]['xml'];
+                    ?> ');
+            initialize('map2', 'static/trainings-xml.bin');
             initialize('map3', 'static/trasa.tcx');
         });
     </script>
