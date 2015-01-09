@@ -51,7 +51,7 @@ class TrainingModel extends Model{
 
     public function getTraining($training_id)
     {
-        $sql = "SELECT id, distance, t_time, calories,  FROM training WHERE id = :training_id LIMIT 1";
+        $sql = "SELECT id, distance, time, calories FROM trainings WHERE id = :training_id LIMIT 1";
         $query = $this->_Db->prepare($sql);
         $parameters = array(':training_id' => $training_id);
         $query->execute($parameters);
