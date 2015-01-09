@@ -17,10 +17,9 @@ class TrainingController extends Controller{
     }
 
     public function index(){
-        $Results = $this->TrainingModel->getLastTraining();
+        $Results = $this->TrainingModel->getLastTrainings();
 
-        require 'application/views/main/index_logged.phtml';
-        require 'application/views/layouts/header_logged.phtml';
+        require 'application/views/training/index.phtml';
     }
 
     public function display($id){

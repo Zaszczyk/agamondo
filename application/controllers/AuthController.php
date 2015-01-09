@@ -4,7 +4,7 @@ class AuthController extends Controller{
 
     public function index(){
         if($_SESSION['logged'] == true){
-            header('Location: '.Config::PATH.'main/index/');
+            header('Location: '.Config::PATH);
             exit;
         }
 
@@ -19,7 +19,7 @@ class AuthController extends Controller{
             }
 
             if($result === true){
-                header('Location: '.Config::PATH.'auth/index/');
+                header('Location: '.Config::PATH);
                 exit;
             }
             $resp['type'] = 0;
