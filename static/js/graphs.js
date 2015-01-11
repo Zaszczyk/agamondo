@@ -2,7 +2,7 @@
  * Created by Kamil on 2015-01-04.
  */
 function getPoint() {
-    xml = xmls.pop();
+    /*xml = xmls.pop();*/
     var points = [];
     var alt = [];
     var distance = 0;

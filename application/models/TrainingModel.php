@@ -20,7 +20,8 @@ class TrainingModel extends Model{
     }
     public function getLastTrainings()
     {
-        $sql = "SELECT `trainings`.id,`trainings`.xml,`trainings`.title,`trainings`.distance, `trainings`.time FROM `trainings` WHERE user_id = :uid ORDER BY `trainings`.id DESC LIMIT 3 ";
+        $sql = "SELECT `trainings`.id,`trainings`.xml,`trainings`.title,`trainings`.distance, `trainings`.time FROM `trainings`
+                WHERE user_id = :uid ORDER BY `trainings`.id DESC LIMIT 3 ";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':uid', $_SESSION['id']);
         $query->execute();

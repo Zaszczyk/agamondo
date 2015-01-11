@@ -5,13 +5,13 @@
     $( document ).ready(function() {
         var xmls = [];
         <?php
-            $ResultsReversed = array_reverse($Results);
-            foreach($ResultsReversed as &$training){
-                $training = preg_replace('/\s+/', '', $training);
-                echo 'xmls.push(\''.$training['xml'].'\');';
-            }
-        ?>
+            /*$ResultsReversed = array_reverse($Results);*/
+            /*foreach($ResultsReversed as &$training){*/
 
+                $Results = preg_replace('/\s+/', '', $Results);
+                echo 'xmls.push(\''.$Results['xml'].'\');';
+            /*}*/
+        ?>
         $('.google-map').each(function() {
             displayMap($(this).attr('id'));
         });
@@ -42,8 +42,9 @@
 
             poly.setMap(map);
             map.fitBounds(bounds);
-
+            getPoint();
         }
+
     });
 </script>
 <div class="activity">
@@ -95,7 +96,7 @@
     </div>
 
 </div>
-<div id="google-map-<?php echo $i=1;?>" class="google-map">
+<div id="google-map-<?php echo 1;?>" class="google-map">
 </div>
 <div class="graph">
     <div id="placeholder" class="graph-placeholder"></div>

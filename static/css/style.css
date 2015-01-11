@@ -812,7 +812,18 @@ label{
     color: #fff;
     font-size: 16px;
 }
-
+/* GRAPHS */
+.graph{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 80px;
+}
+.graph-placeholder {
+    width: 95%;
+    height: 250px;
+    font-size: 14px;
+    line-height: 1.2em;
+}
 /* FOOTER*/
 footer,#activity-footer {
     height: 30px;
