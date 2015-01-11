@@ -57,6 +57,7 @@
             </div>
             <h4><?php echo $Results['title']; ?></h4>
             <a href=""><?php echo $_SESSION['login']; ?></a>
+            <h5>Opis treningu:</h5>
             <h6><?php echo $Results['description']; ?></h6>
         </div>
         <div class="activity-content-right">
@@ -81,7 +82,12 @@
                     <h3>Prędkość maksymalna:</h3>
                 </div>
                 <div class="activity-content-right-more-speed">
-                    <h4>28.2km/h</h4>
+                    <h4><?php
+                        list($hour, $minute, $second) = preg_split('/[: -]/', $Results['time']);
+                        $time =$hour + round(($minute/60),2);
+                        $Average =  round(($Results['distance']/$time),1);
+                        echo $Average;?> km/h</h4>
+
                     <h4>50.2km/h</h4>
                 </div>
             </div>
