@@ -94,8 +94,8 @@ function draw(d1,d2) {
             }
         ]
     });
-    var ticks = $(".tickLabel").slice(8,18);
-    var ticks2 = $(".tickLabel").slice(18,28);
+    var ticks = $(".tickLabel").slice(9,14);
+    var ticks2 = $(".tickLabel").slice(14,21);
     ticks.each(function(i) { $(this).css("color", "rgba(255, 0, 0, 0.8)"); });
     ticks2.each(function(i) { $(this).css("color", "#adadad"); });
     var legends = $("#placeholder .legendLabel");

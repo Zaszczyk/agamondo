@@ -12,7 +12,7 @@
                 echo 'xmls.push(\''.$Results['xml'].'\');';
             /*}*/
         ?>
-        $('.google-map').each(function() {
+        $('.map_canvas').each(function() {
             displayMap($(this).attr('id'));
         });
 
@@ -96,7 +96,7 @@
     </div>
 
 </div>
-<div id="google-map-<?php echo 1;?>" class="google-map">
+<div id="google-map-<?php echo 1;?>" class="map_canvas" >
 </div>
 <div class="graph">
     <div id="placeholder" class="graph-placeholder"></div>

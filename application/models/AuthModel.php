@@ -82,6 +82,15 @@ class AuthModel extends Model{
         }
 
     }
+    public function updateAccount($id, $login, $password, $name, $email, $weight, $height)
+    {
+        $sql = "UPDATE users SET login = :login, name = :name, email = :email, weight = :weight, height = :height
+                WHERE id = :user_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':login' => $login, ':name' => $name, ':email' => $email,
+            ':weight' => $weight, ':height' => $height, ':user_id' => $id);
+        $query->execute($parameters);
+    }
 
 
     public function checkLogin($login){
@@ -197,6 +206,15 @@ class AuthModel extends Model{
         $query->bindParam(':success', $success, PDO::PARAM_BOOL);
         $query->bindParam(':ip', $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
         $query->execute();
+    }
+    public function getUser($user_id){
+        $sql = "SELECT login, name, email, weight, height FROM users
+                WHERE id = :user_id LIMIT 1";
+        $query = $this->_Db->prepare($sql);
+        $parameters = array(':user_id' => $user_id);
+        $query->execute($parameters);
+
+        return $query->fetch();
     }
 }
 ?>

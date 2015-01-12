@@ -477,7 +477,7 @@ section h3 span{
     margin:-90px 200px 0px 0px;
 }
 
-#map_canvas{
+.map_canvas{
     width: 88%;
     height: 60%;
     margin: 30px 0px 0px 80px;
@@ -823,6 +823,12 @@ label{
     height: 250px;
     font-size: 14px;
     line-height: 1.2em;
+}
+#placeholder > div.legend > table{
+    width:110px;
+}
+#placeholder > table > tbody > tr > div.legendColorBox{
+    padding:2px;
 }
 /* FOOTER*/
 footer,#activity-footer {
