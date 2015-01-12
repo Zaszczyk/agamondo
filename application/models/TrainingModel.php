@@ -29,11 +29,12 @@ class TrainingModel extends Model{
         return $query->fetchAll();
     }
 
-    public function addTraining($xml, $distance, $time, $calories)
+    public function addTraining($user_id, $xml, $distance, $time, $calories)
     {
 
-        $sql = "INSERT INTO trainings (xml, distance, time, calories) VALUES (:xml, :distance, :time, :calories)";
+        $sql = "INSERT INTO trainings (user_id, xml, distance, time, calories) VALUES (:user_id, :xml, :distance, :time, :calories)";
         $query = $this->_Db->prepare($sql);
+        $query->bindParam(':user_id', $user_id);
         $query->bindParam(':xml',$xml,PDO::PARAM_LOB);
         $query->bindParam(':distance',$distance);
         $query->bindParam(':time',$time);

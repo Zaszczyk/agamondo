@@ -54,26 +54,22 @@ class ApiController extends Controller{
         }
     }
 
-    public function xml(){
-
-        if(isset($_POST['xml']))
-            echo 'parametr: '.$_POST['xml'];
-    }
-
-
-    public function test(){
-        echo 'sieeema';
-        if(isset($_POST['hash']))
-            echo ', parametr: '.$_POST['hash'];
-    }
-
     public function addTraining(){
-        /*
-        $xml = fopen($this->Path.'trasa.tcx','rb');
-        $distance = '7032.4';
-        $time = '01:12:31';
-        $calories = 1100;
-        */
+        if(empty($_POST['hash']) || empty($_POST['xml'])){
+            $this->Return['type'] = 0;
+            $this->Return['text'] = 'Podaj parametry hash i xml.';
+            return false;
+        }
+
+        $AuthModel = $this->loadModel('AuthModel');
+
+        $user_id = $AuthModel->checkHashUserLogged($_POST['hash']);
+        if($user_id == null){
+            $this->Return['type'] = 0;
+            $this->Return['text'] = 'Użytkownik z podanym hash nie jest zalogowany.';
+            return false;
+        }
+
         $distance = $_POST['distance'];
         $time = $_POST['time'];
         $calories = $_POST['calories'];
@@ -81,7 +77,7 @@ class ApiController extends Controller{
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
-            $TrainingModel->addTraining($xml, $distance, $time, $calories);
+            $TrainingModel->addTraining($user_id, $xml, $distance, $time, $calories);
             echo 'trening został zapisany';
         }
         catch(PDOException $e){
