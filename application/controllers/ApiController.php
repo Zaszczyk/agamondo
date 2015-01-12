@@ -16,6 +16,11 @@ class ApiController extends Controller{
         $this->OpenDatabaseConnection();
     }
 
+    public function index(){
+        $this->Return['type'] = 0;
+        $this->Return['text'] = 'Podaj nazwe funkcji po /.';
+    }
+
     public function login(){
         if(!empty($_POST['login']) && !empty($_POST['password'])){
             $loginLower = mb_strtolower($_POST['login']);
