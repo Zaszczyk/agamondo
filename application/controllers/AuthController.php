@@ -169,22 +169,17 @@ class AuthController extends Controller{
 
         mail($email, $subject, $body, $headers);
     }
-    public function updateUser()
+    public function editUser()
     {
-        if (isset($_POST["submit_update_user"])) {
-            $this->model->updateSong($_POST["login"], $_POST["name"], $_POST["emial"], $_POST['weight'],$_POST["height"],$_POST["id"]);
-        }
-        /*header('location: ' . URL . 'training/index');*/
+        $AuthModel = $this->LoadModel('AuthModel');
+        $AuthModel->updateAccount($_POST["login"], $_POST["name"], $_POST["emial"], $_POST['weight'],$_POST["height"],$_POST["id"]);
+        $this->edit();
     }
-
-    public function editUser($user_id)
+    public function edit()
     {
-        if(!ctype_digit($user_id)){
-            $this->error404();
-            return false;
-        }
-        $user = $this->AuthModel->getUser($user_id);
-        require 'view/auth/edit.phtml';
+        $AuthModel = $this->LoadModel('AuthModel');
+        $user = $AuthModel->getUser($_SESSION['id']);
+        require 'application/views/auth/edit.phtml';
     }
 
 }

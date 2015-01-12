@@ -43,22 +43,22 @@
         }
     });
 </script>
-<div id="mainafterlogin-content">
-    <h3 id="mainafterlogin-training-margin">Twoje ostatnie aktywności:</h3>
+<?php
+if(empty($Results)){
+require 'application/views/training/no_training.phtml';
+?>
 
-    <?php
-        if(empty($Results)){
-//
-//        require 'application/views/training/no_training.phtml';
-//
-    ?>
-        Brak treningów
     <?php
         }
         else{
             $i = 1;
+            ?>
+            <div id="mainafterlogin-content">
+                <h3 id="mainafterlogin-training-margin">Twoje ostatnie aktywności:</h3>
+                <?php
             foreach($Results as &$training){
         ?>
+
                 <div class="mainafterlogin-training">
                     <div class="mainafterlogin-training-left">
                         <div class="avatar-training">
