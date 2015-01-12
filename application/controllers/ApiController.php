@@ -70,15 +70,27 @@ class ApiController extends Controller{
             return false;
         }
 
-        $distance = $_POST['distance'];
-        $time = $_POST['time'];
-        $calories = $_POST['calories'];
+        $xmlReader = new XMLReader;
+        $xmlReader->xml($_POST['xml']);
+
+        while ($xmlReader->read()) {
+            if ($xmlReader->nodeType == XMLReader::ELEMENT) {
+                $exp = $xmlReader->expand();
+                if ($exp->nodeName == 'Calories')
+                    $calories = $exp->nodeValue;
+                elseif ($exp->nodeName == 'DistanceMeters')
+                    $distance = $exp->nodeValue;
+            }
+        }
+
+        $time = '12:34';
         $xml = $_POST['xml'];
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
             $TrainingModel->addTraining($user_id, $xml, $distance, $time, $calories);
-            echo 'trening został zapisany';
+            $this->Return['type'] = 0;
+            $this->Return['text'] = 'Trening został zapisany.';
         }
         catch(PDOException $e){
             echo $e;
