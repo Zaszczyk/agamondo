@@ -698,7 +698,20 @@ section h3 span{
     display: table;
 }
 /* FORMS */
-.form-container{
+.no_training-form-container{
+    height: 300px;
+}
+.no_training-form-container h4{
+    font-size:40px;
+    color:white;
+    text-align: center;
+    margin-top:30px;
+}
+.no_training-button{
+    margin: 50px auto;
+    width:120px;
+}
+.form-container,.no_training-form-container{
     width: 400px;
     margin: 0 auto;
     background-color: rgba(230, 231, 232, .5);
@@ -767,7 +780,7 @@ label{
 }
 
 
-#username, #password, #firstname, #lastname, #email, #password2, .input-text {
+#username, #password, #firstname, #lastname, #email, #password2, .input-text, #name, #weight, #height {
     display: block;
     width: 360px;
     margin: 0 auto;
@@ -780,7 +793,7 @@ label{
     border: 1px solid grey;
     outline: 0px;
 }
-#signup #username,#signup #password,#signup #email, #signup #password2 {
+#signup #username,#signup #password,#signup #email, #signup #password2, #signup #name, #signup #weight, #signup #height {
     margin-top:25px;
 }
 
@@ -839,6 +852,9 @@ footer,#activity-footer {
     text-align: center;
     font-family: sans-serif;
     padding-top:5px;
+}
+#no_training-footer{
+
 }
 #activity-footer{
     margin-top:30px;
