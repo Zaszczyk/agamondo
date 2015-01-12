@@ -216,5 +216,14 @@ class AuthModel extends Model{
 
         return $query->fetch();
     }
+
+    public function checkHashUserLogged($hash){
+        $hash = hash('SHA224', $hash);
+        $query = $this->_Db->prepare('SELECT user_id FROM users_logged WHERE hash= :hash LIMIT 1');
+        $query->bindParam(':hash', $hash, PDO::PARAM_STR);
+        $query->execute();
+        $ret =  $query->fetch();
+        return $ret['user_id'];
+    }
 }
 ?>

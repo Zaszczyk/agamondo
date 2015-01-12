@@ -176,6 +176,7 @@ class AuthController extends Controller{
         }
         /*header('location: ' . URL . 'training/index');*/
     }
+
     public function editUser($user_id)
     {
         if(!ctype_digit($user_id)){
