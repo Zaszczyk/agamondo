@@ -678,11 +678,65 @@ section h3 span{
     animation: bounce 2s infinite;
 }
 #mainpage3 {
-    background: url("../img/3.jpg");
+    background: none repeat scroll 0 0 #f8f8f8;
+    text-align: center;
     background-size: cover;
 }
+.mainpage3-center{
+    width:950px;
+    margin:0 auto;
+    margin-top:75px;
+}
+.mainpage3-col{
+    width:33.33333%;
+    float:left;
+    padding:0 15px;
+    min-height: 1px;
+    position:relative;
+}
+.mainpage3-col-effect{
+    font-family: "Open Sans",sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+.mainpage3-col-effect-img{
+    border: 1px dashed #909090;
+    border-radius: 50%;
+    height: 122px;
+    margin: 40px auto 0;
+    width: 122px;
+}
+.mainpage3-col-effect-img-inside{
+    background-color: #5b5956;
+    border-radius: 50%;
+    height: 110px;
+    margin: 5px;
+    padding-top: 23px;
+    transition: all 500ms ease 0s;
+    width: 110px;
+}
+.mainpage3-col-effect-img-inside-img{
+    position:relative;
+    display:inline-block;
+    width: 60px;
+    height: 60px;
+}
+.mainpage3-col-effect-head{
+    color: #FEC63E;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+.mainpage3-col-effect-text {
+    color: #777777;
+    font-size: 13px;
+    padding:0 15px;
+}
+
 #mainpage4 {
-    background: url("../img/3.jpg");
+    background: none repeat scroll 0 0 #f8f8f8;
+    text-align: center;
     background-size: cover;
 }
 #mainpage5 {
