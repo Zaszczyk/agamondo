@@ -521,7 +521,7 @@ section h3 span{
     padding: 0 0 0 180px;
 }
 .activity-content-left h4{
-    margin: -80px 0 6px 180px;
+    margin: -90px 0 6px 180px;
     color:#2C4143;
 }
 .activity-content-left h5{
@@ -714,6 +714,9 @@ section h3 span{
     padding-top: 23px;
     transition: all 500ms ease 0s;
     width: 110px;
+}
+.mainpage3-col-effect-img-inside:hover {
+    background-color: #FEC63E;
 }
 .mainpage3-col-effect-img-inside-img{
     position:relative;

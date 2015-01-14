@@ -4,6 +4,11 @@
 function getPoint() {
     /*xml = xmls.pop();*/
     var points = [];
+    var max_speed = 0;
+    var max_altitude = 0;
+    var count_altitude = 0;
+    var dif_altitude = 0;
+    var last_altitude = 0;
     var alt = [];
     var distance = 0;
     var lat2 = 0;
@@ -21,6 +26,13 @@ function getPoint() {
         var lat = $(this).find("LatitudeDegrees").text();
         var lon = $(this).find("LongitudeDegrees").text();
         var altitude = parseInt($(this).find("AltitudeMeters").text());
+        dif_altitude=altitude-last_altitude;
+        console.log(dif_altitude);
+        if(altitude !=0 && last_altitude!=0 && dif_altitude>0)
+            count_altitude = count_altitude + dif_altitude;
+        last_altitude = altitude;
+        if(altitude>max_altitude)
+            max_altitude = altitude;
         if(help == 0){
             lat2 = lat;
             lon2 = lon;
@@ -34,6 +46,8 @@ function getPoint() {
             console.log("nieporzadany punkt");
         else
             speed = distance2/0.000277;
+            if(speed>max_speed)
+                max_speed = speed;
         distance = distance + getDistanceFromLatLonInKm(lat2, lon2, lat, lon);
         if(counter%co_ile_przesiac == 0)
             points.push([distance, speed]);
@@ -42,6 +56,9 @@ function getPoint() {
         lat2 = lat;
         lon2 = lon;
     });
+    $("#max_speed").html(max_speed.toFixed(1)+" km/h");
+    $("#altitude").html(count_altitude.toFixed(0)+" m");
+    $("#max_altitude").html(max_altitude.toFixed(0)+" m");
     draw(points,alt);
 }
 function speedFormatter(v, axis) {
