@@ -24,14 +24,33 @@
             });
 
             var points = [];
+            var end_myLatLng=0;
+            var start_myLatLng=0;
             var bounds = new google.maps.LatLngBounds ();
-            $(xml).find("Position").each(function() {
+            $(xml).find("Position").each(function(i) {
                 var lat=$(this).find("LatitudeDegrees").text();
                 var lon = $(this).find("LongitudeDegrees").text();
+                if(i==0)
+                    start_myLatLng = new google.maps.LatLng(lat, lon);
                 var p = new google.maps.LatLng(lat, lon);
                 points.push(p);
                 bounds.extend(p);
+                end_myLatLng = new google.maps.LatLng(lat, lon);
             });
+
+            var marker = new google.maps.Marker({
+                position: start_myLatLng,
+                map: map,
+                title: 'Start',
+                icon: 'static/img/start.png'
+            });
+            var marker2 = new google.maps.Marker({
+                position: end_myLatLng,
+                map: map,
+                title: 'Meta',
+                icon: 'static/img/finish.png'
+            });
+
 
             var poly = new google.maps.Polyline({
                 path: points,
