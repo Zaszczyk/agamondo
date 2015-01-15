@@ -1,7 +1,7 @@
 $( document ).ready(function() {
-var sections = $('section')
-    , nav = $('#slide-nav')
-    , nav_height = nav.outerHeight();
+    var sections = $('section')
+        , nav = $('#slide-nav')
+        , nav_height = nav.outerHeight();
 
     $(window).on('scroll', function () {
         var cur_pos = $(this).scrollTop();
@@ -19,8 +19,14 @@ var sections = $('section')
                 $(this).addClass('active');
                 nav.find('a[href="#'+$(this).attr('id')+'"]').addClass('active');
                 $('a[href="#'+$(this).attr('id')+'"]').closest('li').addClass('active');
-                console.log($('#slide-nav a[href="#'+$(this).attr('id')+'"]'));
+
+                //start video
+                console.log($(this).attr('id'));
+                if($(this).attr('id') == 'mainpage4'){
+                    $('#video').attr('autoplay', '1');
+                }
             }
+
         });
     });
 
@@ -39,4 +45,7 @@ var sections = $('section')
 
         return false;
     });
+
+    $('#video').attr('height', $(window).height());
+
 });

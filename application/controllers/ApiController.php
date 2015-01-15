@@ -74,9 +74,17 @@ class ApiController extends Controller{
             $this->Return['text'] = 'Użytkownik z podanym hash nie jest zalogowany.';
             return false;
         }
+        $xml = $_POST['xml'];
 
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+        //mail('ati_b@wp.pl', 'agamondo-xml', $xml, $headers);
+
+        $xml = str_replace('&lt;', '<', $xml);
+        $xml = str_replace('&gt;', '>', $xml);
         $xmlReader = new XMLReader;
-        $xmlReader->xml($_POST['xml']);
+        $xmlReader->xml($xml);
+
 
         while ($xmlReader->read()) {
             if ($xmlReader->nodeType == XMLReader::ELEMENT) {
@@ -85,11 +93,16 @@ class ApiController extends Controller{
                     $calories = $exp->nodeValue;
                 elseif ($exp->nodeName == 'DistanceMeters')
                     $distance = $exp->nodeValue;
+                elseif ($exp->nodeName == 'TotalTimeSeconds')
+                    $seconds = $exp->nodeValue;
             }
         }
 
-        $time = '12:34';
-        $xml = $_POST['xml'];
+        $hours = floor($seconds / 3600);
+        $mins = floor(($seconds - ($hours*3600)) / 60);
+        $secs = floor($seconds % 60);
+
+        $time = $hours.':'.$mins.':'.$secs;
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
