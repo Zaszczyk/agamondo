@@ -8,6 +8,15 @@ class AuthController extends Controller{
             exit;
         }
 
+        require 'application/views/main/index.phtml';
+    }
+
+    public function login(){
+        if($_SESSION['logged'] == true){
+            header('Location: '.Config::PATH);
+            return false;
+        }
+
         if(isset($_POST['login']) && isset($_POST['password'])){
 
             $AuthModel = $this->loadModel('AuthModel');
@@ -26,7 +35,7 @@ class AuthController extends Controller{
             $resp['text'] = 'Podałeś nieprawidłowe dane';
         }
 
-        require 'application/views/main/index.phtml';
+        require 'application/views/auth/login.phtml';
     }
 
     public function forgetPassword(){

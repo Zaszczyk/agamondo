@@ -35,7 +35,8 @@ class ApiController extends Controller{
                     return false;
                 }
 
-                $id = $AuthModel->getIdFromLogin($loginLower);
+                $this->Return = $AuthModel->getDataFromLogin($loginLower);
+                $id = $this->Return['id'];
 
                 if($id == null){
                     $this->Return['type'] = 0;
@@ -43,7 +44,7 @@ class ApiController extends Controller{
                     return false;
                 }
                 $hash = $AuthModel->addLoggedUser($id);
-                $this->Return['type'] = 0;
+                $this->Return['type'] = 1;
                 $this->Return['text'] = 'Zostałeś pomyślnie zalogowany.';
                 $this->Return['hash'] = $hash;
             }

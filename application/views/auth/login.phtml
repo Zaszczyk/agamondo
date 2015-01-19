@@ -3,8 +3,13 @@
         <div class="form-container">
             <form action="auth/login/" method="post">
                 <div class = "form-heading" >
-                        <h3>Zaloguj się</h3>
+                    <h3>Zaloguj się</h3>
                 </div>
+                <?php
+                if($resp['type'] == 0){
+                    echo $resp['text'];
+                }
+                ?>
                 <label for="username">Nazwa użytkownika:</label>
                 <input type="text" id="username" name="login">
                 <label for="password">Hasło:</label>
