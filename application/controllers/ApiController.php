@@ -96,6 +96,8 @@ class ApiController extends Controller{
                     $distance = $exp->nodeValue;
                 elseif ($exp->nodeName == 'TotalTimeSeconds')
                     $seconds = $exp->nodeValue;
+                elseif ($exp->nodeName == 'Id')
+                    $date = $exp->nodeValue;
             }
         }
 
@@ -104,10 +106,13 @@ class ApiController extends Controller{
         $secs = floor($seconds % 60);
 
         $time = $hours.':'.$mins.':'.$secs;
+        $date = DateTime::createFromFormat('D M j G:i:s T Y', $date)->format('Y-m-d G:i:s');
+
+        $title = 'Trening z dnia '.$date;
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
-            $TrainingModel->addTraining($user_id, $xml, $distance, $time, $calories);
+            $TrainingModel->addTraining($user_id, $xml, $distance, $time, $calories, $date, $title);
             $this->Return['type'] = 0;
             $this->Return['text'] = 'Trening został zapisany.';
         }
