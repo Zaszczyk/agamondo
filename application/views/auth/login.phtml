@@ -6,7 +6,7 @@
                     <h3>Zaloguj się</h3>
                 </div>
                 <?php
-                if($resp['type'] == 0){
+                if($resp['type'] == 0 || $resp['type'] == 1){
                     echo $resp['text'];
                 }
                 ?>
@@ -14,8 +14,8 @@
                 <input type="text" id="username" name="login">
                 <label for="password">Hasło:</label>
                 <input type="password" id="password" name="password" autocomplete="off">
-                <input type="checkbox" id="checkbox">
-                <label class="check" for="checkbox">Zapamiętaj mnie</label>
+
+                <a href="auth/forgetpassword/" class="check">Zapomniałem hasła</a>
                 <div class="form-footer">
                     <button id="form-footer-button">Zaloguj się</button>
                 </div>

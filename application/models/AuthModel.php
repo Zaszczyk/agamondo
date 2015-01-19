@@ -178,6 +178,7 @@ class AuthModel extends Model{
     }
 
     public function setNewPassword($id, $hashAndSalt){
+        echo $id.$hashAndSalt;
         $query = $this->_Db->prepare('UPDATE users SET password= :new WHERE id= :id');
         $query->bindParam(':new', $hashAndSalt, PDO::PARAM_STR);
         $query->bindParam(':id', $id, PDO::PARAM_INT);

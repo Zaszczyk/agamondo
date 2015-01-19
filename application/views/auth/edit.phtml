@@ -6,7 +6,7 @@
                     <h3>Edycja konta</h3>
                 </div>
                 <?php
-                if($resp['type'] == 0){
+                if(isset($resp['type'])){
                     echo $resp['text'];
                 }
                 ?>
@@ -19,14 +19,14 @@
                 <label>Twój email:</label>
                 <input type="text" placeholder="Twój email" id="email" name="email" value="<?php echo $user['email'];?>">
 
-                <label>Waga:</label>
+                <label>Waga (kg):</label>
                 <input type="text" placeholder="Waga" id="weight" name="weight" value="<?php echo $user['weight'];?>">
 
-                <label>Wzrost:</label>
+                <label>Wzrost (cm):</label>
                 <input type="text" placeholder="Wzrost" id="height" name="height" value="<?php echo $user['height'];?>">
 
                 <div class="form-footer">
-                    <button id="form-footer-button" type="submit">Edytuj</button>
+                    <button id="form-footer-button" type="submit">Zapisz</button>
                 </div>
             </form>
         </div>

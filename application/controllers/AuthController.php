@@ -203,6 +203,10 @@ class AuthController extends Controller{
                 throw new Exception('Istnieje już użytkownik o podanym loginie.');
 
             $AuthModel->editUser($_SESSION['id'], $_POST["login"], $_POST["name"], $_POST["email"], $_POST['weight'],$_POST["height"]);
+
+            $_SESSION['login'] = $_POST["login"];
+            $resp['type'] = 1;
+            $resp['text'] = 'Zmiany zostały zapisane';
         }
         catch(Exception $e){
             $resp['type'] = 0;
@@ -221,6 +225,52 @@ class AuthController extends Controller{
         $AuthModel = $this->LoadModel('AuthModel');
         $user = $AuthModel->getUser($_SESSION['id']);
         require 'application/views/auth/edit.phtml';
+    }
+
+    public function password($resp = null){
+        //$this->NoCSRFToken = NoCSRF::generate(Config::NOCSRF_SESSION_VARIABLE);
+        require 'application/views/auth/password.phtml';
+    }
+
+    public function changePassword(){
+        $resp['type'] = 0;
+
+        try{
+            //NoCSRF::check(Config::NOCSRF_SESSION_VARIABLE, $_POST, true, Config::NOCSRF_TOKEN_TIMEOUT);
+        }
+        catch(NoCSRFException $e){
+            $resp['text'] = 'Nieprawidłowy token bezpieczeństwa, spróbuj ponownie.';
+            $this->password($resp);
+            return false;
+        }
+
+        if(mb_strlen($_POST['password1']) < 4){
+            $resp['text'] = 'Hasło musi mieć co najmniej 4 znaki.';
+            $this->password($resp);
+            return false;
+        }
+
+        $AuthModel = $this->loadModel('AuthModel');
+
+        try{
+            $result = $AuthModel->changePassword($_POST['old'], $_POST['password1'], $_POST['password2']);
+        }
+        catch(PDOException $e){
+            Functions::logger('PDO', $e);
+        }
+
+        if($result === true){
+            $resp['type'] = 1;
+            $resp['text'] = 'Hasło zostało zmienione.';
+        }
+        elseif($result == -1){
+            $resp['text'] = 'Hasła nie są takie same.';
+        }
+        elseif($result == -2){
+            $resp['text'] = 'Stare hasło jest nieprawidłowe.';
+        }
+
+        $this->password($resp);
     }
 
 }
