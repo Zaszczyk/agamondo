@@ -29,6 +29,7 @@ class TrainingController extends Controller{
         }
 
         $Results = $this->TrainingModel->getTraining($id);
+
         require 'application/views/training/display.phtml';
     }
 

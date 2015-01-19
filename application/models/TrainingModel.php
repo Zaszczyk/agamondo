@@ -55,9 +55,8 @@ class TrainingModel extends Model{
 
     public function getTraining($training_id)
     {
-        $sql = "SELECT trainings.id, trainings.xml, trainings.title, trainings.activity, activities.name,
-                trainings.distance, trainings.time, trainings.calories, trainings.description, trainings.date FROM trainings
-                JOIN activities ON trainings.activity = activities.id
+        $sql = "SELECT trainings.*, activities.name FROM trainings
+                LEFT JOIN activities ON trainings.activity = activities.id
                 WHERE trainings.id = :training_id LIMIT 1";
         $query = $this->_Db->prepare($sql);
         $parameters = array(':training_id' => $training_id);

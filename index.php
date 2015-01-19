@@ -9,8 +9,8 @@ function myErrorHandler($errno, $errstr, $errfile, $errline){
 
     //mail('ati_b@wp.pl', 'agamondo', $text, $headers);
 }
-error_reporting(E_ALL ^ E_NOTICE);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', 0);
 //set_error_handler(myErrorHandler, E_ALL ^ E_NOTICE);
 
 require_once 'application/libs/Config.class.php';
