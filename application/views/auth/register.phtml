@@ -10,9 +10,15 @@
                     print_r($resp);
                     echo '</pre>';
                 ?>
+                <label>Nazwa użytkownika:</label>
                 <input type="text" placeholder="Nazwa użytkownika" id="username" name="login" autocomplete="off" value="<?php echo $value['login'];?>">
+
+                <label>Twój e-mail:</label>
                 <input type="text" placeholder="Twój email" id="email" name="email" autocomplete="off" value="<?php echo $value['email'];?>">
+                <label>Hasło:</label>
                 <input type="password" placeholder="Hasło" id="password" name="password1" autocomplete="off">
+
+                <label>Powtórz hasło:</label>
                 <input type="password" placeholder="Powtórz Hasło" id="password2" name="password2" autocomplete="off">
                 <div class="form-footer">
                     <button id="form-footer-button">Zarejestruj</button>

@@ -5,12 +5,26 @@
                 <div class = "form-heading" >
                     <h3>Edycja konta</h3>
                 </div>
+                <?php
+                if($resp['type'] == 0){
+                    echo $resp['text'];
+                }
+                ?>
+                <label>Nazwa użytkownika:</label>
                 <input type="text" placeholder="Nazwa użytkownika" id="username" name="login" value="<?php echo $user['login'];?>">
-                <input type="text" placeholder="Imię i Nazwisko" id="name" name="name" value="<?php echo $user['name'];?>">
+
+                <label>Imię i nazwisko:</label>
+                <input type="text" placeholder="Imię i nazwisko" id="name" name="name" value="<?php echo $user['name'];?>">
+
+                <label>Twój email:</label>
                 <input type="text" placeholder="Twój email" id="email" name="email" value="<?php echo $user['email'];?>">
-                <input type="text" placeholder="Wzrost" id="weight" name="weight" value="<?php echo $user['weight'];?>">
-                <input type="text" placeholder="Waga" id="height" name="height" value="<?php echo $user['height'];?>">
-                <input type="hidden" name="id" value="<?php echo $user['id']; ?>" />
+
+                <label>Waga:</label>
+                <input type="text" placeholder="Waga" id="weight" name="weight" value="<?php echo $user['weight'];?>">
+
+                <label>Wzrost:</label>
+                <input type="text" placeholder="Wzrost" id="height" name="height" value="<?php echo $user['height'];?>">
+
                 <div class="form-footer">
                     <button id="form-footer-button" type="submit">Edytuj</button>
                 </div>

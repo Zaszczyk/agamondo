@@ -180,12 +180,44 @@ class AuthController extends Controller{
     }
     public function editUser()
     {
-        $AuthModel = $this->LoadModel('AuthModel');
-        $AuthModel->updateAccount($_POST["login"], $_POST["name"], $_POST["emial"], $_POST['weight'],$_POST["height"],$_POST["id"]);
+        if($_SESSION['logged'] == false){
+            header('Location: '.Config::PATH);
+            return false;
+        }
+
+        try{
+            $loginL = mb_strlen($_POST['login']);
+
+            if($loginL < 1 || $loginL > 32)
+                throw new Exception('Login może mieć 1-32 znaków.');
+
+            if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+                throw new Exception('Podany e-mail jest nieprawidłowy.');
+
+            $AuthModel = $this->LoadModel('AuthModel');
+
+            if($AuthModel->checkEmail($_POST['email']) !== false)
+                throw new Exception('Istnieje już użytkownik o podanym adresie e-mail.');
+
+            if($AuthModel->checkLogin($_POST['login']) !== false)
+                throw new Exception('Istnieje już użytkownik o podanym loginie.');
+
+            $AuthModel->editUser($_SESSION['id'], $_POST["login"], $_POST["name"], $_POST["email"], $_POST['weight'],$_POST["height"]);
+        }
+        catch(Exception $e){
+            $resp['type'] = 0;
+            $resp['text'] = $e->getMessage();
+        }
+
         $this->edit();
     }
     public function edit()
     {
+        if($_SESSION['logged'] == false){
+            header('Location: '.Config::PATH);
+            return false;
+        }
+
         $AuthModel = $this->LoadModel('AuthModel');
         $user = $AuthModel->getUser($_SESSION['id']);
         require 'application/views/auth/edit.phtml';

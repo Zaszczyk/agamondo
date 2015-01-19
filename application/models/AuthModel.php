@@ -82,11 +82,11 @@ class AuthModel extends Model{
         }
 
     }
-    public function updateAccount($id, $login, $password, $name, $email, $weight, $height)
+    public function editUser($id, $login, $name, $email, $weight, $height)
     {
         $sql = "UPDATE users SET login = :login, name = :name, email = :email, weight = :weight, height = :height
                 WHERE id = :user_id";
-        $query = $this->db->prepare($sql);
+        $query = $this->_Db->prepare($sql);
         $parameters = array(':login' => $login, ':name' => $name, ':email' => $email,
             ':weight' => $weight, ':height' => $height, ':user_id' => $id);
         $query->execute($parameters);
@@ -95,7 +95,14 @@ class AuthModel extends Model{
 
     public function checkLogin($login){
         $login = mb_strtolower($login);
-        $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
+
+        if($_SESSION['logged'] == true){
+            $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login AND id != :id LIMIT 1');
+            $query->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
+        }
+        else
+            $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(login)= :login LIMIT 1');
+
         $query->bindParam(':login', $login, PDO::PARAM_STR);
         $query->execute();
         $result = $query->fetch();
@@ -109,7 +116,13 @@ class AuthModel extends Model{
     public function checkEmail($email){
         $email = mb_strtolower($email);
 
-        $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(email)= :email LIMIT 1');
+        if($_SESSION['logged'] == true){
+            $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(email)= :email AND id != :id LIMIT 1');
+            $query->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
+        }
+        else
+            $query = $this->_Db->prepare('SELECT id FROM users WHERE LOWER(email)= :email LIMIT 1');
+
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->execute();
         $result = $query->fetch();

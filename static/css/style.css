@@ -850,9 +850,9 @@ label{
     border: 1px solid grey;
     outline: 0px;
 }
-#signup #username,#signup #password,#signup #email, #signup #password2, #signup #name, #signup #weight, #signup #height {
+/*#signup #username,#signup #password,#signup #email, #signup #password2, #signup #name, #signup #weight, #signup #height {
     margin-top:25px;
-}
+}*/
 
 .check {
     color:#FEC63E;
