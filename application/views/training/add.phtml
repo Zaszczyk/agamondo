@@ -1,0 +1,25 @@
+<div id="login">
+    <div class="centered-vertically">
+        <div class="form-container">
+            <form action="training/add/" method="post">
+                <div class = "form-heading" >
+                    <h3>Zaloguj się</h3>
+                </div>
+                <?php
+                    if($resp['type'] === 0){
+                        echo '<div class="alert alert-danger">'.$resp['text'].'</div>';
+                    }
+                    elseif($resp['type'] === 1){
+                        echo '<div class="alert alert-success">'.$resp['text'].'</div>';
+                    }
+                ?>
+                <label>Plik TCX</label>
+                <input id="username" type="file" name="xml">
+
+                <div class="form-footer">
+                    <button id="form-footer-button">Wyślij</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

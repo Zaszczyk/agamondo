@@ -33,4 +33,11 @@ class TrainingController extends Controller{
         require 'application/views/training/display.phtml';
     }
 
+    public function add(){
+        if(isset($_FILES['xml'])){
+
+        }
+        require 'application/views/training/add.phtml';
+    }
+
 }

@@ -77,42 +77,14 @@ class ApiController extends Controller{
         }
         $xml = $_POST['xml'];
 
-        $headers  = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-        //mail('ati_b@wp.pl', 'agamondo-xml', $xml, $headers);
+        /*$xml = str_replace('&lt;', '<', $xml);
+        $xml = str_replace('&gt;', '>', $xml);*/
 
-        $xml = str_replace('&lt;', '<', $xml);
-        $xml = str_replace('&gt;', '>', $xml);
-        $xmlReader = new XMLReader;
-        $xmlReader->xml($xml);
-
-
-        while ($xmlReader->read()) {
-            if ($xmlReader->nodeType == XMLReader::ELEMENT) {
-                $exp = $xmlReader->expand();
-                if ($exp->nodeName == 'Calories')
-                    $calories = $exp->nodeValue;
-                elseif ($exp->nodeName == 'DistanceMeters')
-                    $distance = $exp->nodeValue;
-                elseif ($exp->nodeName == 'TotalTimeSeconds')
-                    $seconds = $exp->nodeValue;
-                elseif ($exp->nodeName == 'Id')
-                    $date = $exp->nodeValue;
-            }
-        }
-
-        $hours = floor($seconds / 3600);
-        $mins = floor(($seconds - ($hours*3600)) / 60);
-        $secs = floor($seconds % 60);
-
-        $time = $hours.':'.$mins.':'.$secs;
-        $date = DateTime::createFromFormat('D M j G:i:s T Y', $date)->format('Y-m-d G:i:s');
-
-        $title = 'Trening z dnia '.$date;
+        $Training = new Training($xml);
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
-            $TrainingModel->addTraining($user_id, $xml, $distance, $time, $calories, $date, $title);
+            $TrainingModel->addTraining($user_id, $xml, $Training);
             $this->Return['type'] = 0;
             $this->Return['text'] = 'Trening został zapisany.';
         }
