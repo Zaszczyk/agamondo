@@ -35,7 +35,7 @@ class TrainingController extends Controller{
 
     public function add(){
         if(isset($_FILES['xml'])){
-
+            $Training = new Training(/* tutaj xml z formularza ziomeczku */);
         }
         require 'application/views/training/add.phtml';
     }
