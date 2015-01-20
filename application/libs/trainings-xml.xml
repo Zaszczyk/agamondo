@@ -1,0 +1,60 @@
+<Activities>
+    <Activity Sport="Running">
+        <Id>Mon Jan 19 14:09:32 CET 2015</Id>
+        <Track>
+            <Trackpoint>
+                <Time>Mon Jan 19 14:09:39 CET 2015</Time>
+                <Distance>0.0km</Distance>
+                <TotalDistance>0.0km</TotalDistance>
+                <Position>
+                    <LatitudeDegrees>51.7528071</LatitudeDegrees>
+                    <LongitudeDegrees>19.4541858</LongitudeDegrees>
+                    <AltitudeMeters>0.0</AltitudeMeters>
+                </Position>
+            </Trackpoint>
+            <Trackpoint>
+                <Time>Mon Jan 19 14:09:45 CET 2015</Time>
+                <Distance>0.001466km</Distance>
+                <TotalDistance>0.001466km</TotalDistance>
+                <Position>
+                    <LatitudeDegrees>51.7527998</LatitudeDegrees>
+                    <LongitudeDegrees>19.454218</LongitudeDegrees>
+                    <AltitudeMeters>0.0</AltitudeMeters>
+                </Position>
+            </Trackpoint>
+            <Trackpoint>
+                <Time>Mon Jan 19 14:09:50 CET 2015</Time>
+                <Distance>0.001413km</Distance>
+                <TotalDistance>0.00288km</TotalDistance>
+                <Position>
+                    <LatitudeDegrees>51.752817</LatitudeDegrees>
+                    <LongitudeDegrees>19.4542001</LongitudeDegrees>
+                    <AltitudeMeters>0.0</AltitudeMeters>
+                </Position>
+            </Trackpoint>
+            <Trackpoint>
+                <Time>Mon Jan 19 14:09:55 CET 2015</Time>
+                <Distance>5.47E-4km</Distance>
+                <TotalDistance>0.003427km</TotalDistance>
+                <Position>
+                    <LatitudeDegrees>51.7528091</LatitudeDegrees>
+                    <LongitudeDegrees>19.4542012</LongitudeDegrees>
+                    <AltitudeMeters>0.0</AltitudeMeters>
+                </Position>
+            </Trackpoint>
+            <Trackpoint>
+                <Time>Mon Jan 19 14:10:00 CET 2015</Time>
+                <Distance>5.47E-4km</Distance>
+                <TotalDistance>0.003974km</TotalDistance>
+                <Position>
+                    <LatitudeDegrees>51.7528012</LatitudeDegrees>
+                    <LongitudeDegrees>19.4542151</LongitudeDegrees>
+                    <AltitudeMeters>0.0</AltitudeMeters>
+                </Position>
+            </Trackpoint>
+            <TotalTimeSeconds>22</TotalTimeSeconds>
+            <DistanceMeters>0.003974</DistanceMeters>
+            <Calories>0</Calories>
+        </Track>
+    </Activity>
+</Activities>

@@ -34,7 +34,6 @@ class TrainingController extends Controller{
     }
 
     public function add(){
-        var_dump($_FILES['xml']);
         if(isset($_FILES['xml'])){
             echo $_FILES['xml']['type'];
             if ($_FILES['xml']['error'] > 0)
@@ -65,10 +64,13 @@ class TrainingController extends Controller{
                 echo 'Nieodpowiedni typ pliku';
             }
             else{
-                $Training = new Training(file_get_contents($_FILES['xml']['tmp_name']));
+                $xml = file_get_contents($_FILES['xml']['tmp_name']);
+                $Training = new Training($xml);
+                $title = 'bla';
+
                 $TrainingModel = $this->loadModel('TrainingModel');
                 try{
-                    $TrainingModel->addTraining($_SESSION['id'], $_FILES['xml'], $Training);
+                    $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $title);
                     $this->Return['type'] = 0;
                     $this->Return['text'] = 'Trening został zapisany.';
                 }

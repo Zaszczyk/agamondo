@@ -9,9 +9,12 @@ class Training{
     public $date;
     public $title;
 
-    public function __construct($xml){
-        $this->xml = $xml;
-        $this->xmlReader = new XMLReader();
+    public function __construct($xml){/*
+        $xml = str_replace('&lt;', '<', $xml);
+        $xml = str_replace('&gt;', '>', $xml);*/
+
+        $this->xmlReader = new XMLReader;
+        $this->xmlReader->xml($xml);
     }
 
     public function getDistance(){
@@ -60,14 +63,17 @@ class Training{
     }
 
     public function getDate(){
+
         if($this->date != null)
             return $this->date;
 
         while ($this->xmlReader->read()) {
             if ($this->xmlReader->nodeType == XMLReader::ELEMENT) {
                 $exp = $this->xmlReader->expand();
+
                 if ($exp->nodeName == 'Id'){
                     $date = $exp->nodeValue;
+
                     return $this->date = DateTime::createFromFormat('D M j G:i:s T Y', $date)->format('Y-m-d G:i:s');
                 }
             }
@@ -78,6 +84,6 @@ class Training{
         if($this->title != null)
             return $this->tile;
 
-        $this->title = 'Trening z dnia '.$this->getDate();
+        return $this->title = 'Trening z dnia '.$this->getDate();
     }
 }
