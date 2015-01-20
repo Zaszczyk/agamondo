@@ -1,7 +1,7 @@
 <div id="login">
     <div class="centered-vertically">
         <div class="form-container">
-            <form action="training/add/" method="post">
+            <form  enctype="multipart/form-data" action="training/add/" method="post">
                 <div class = "form-heading" >
                     <h3>Zaloguj się</h3>
                 </div>
@@ -14,10 +14,11 @@
                     }
                 ?>
                 <label>Plik TCX</label>
+               <!-- <input type="hidden" name="max_file_size" value="5120000" />-->
                 <input id="username" type="file" name="xml">
 
                 <div class="form-footer">
-                    <button id="form-footer-button">Wyślij</button>
+                    <button id="form-footer-button" type="submit" value="send">Wyślij</button>
                 </div>
             </form>
         </div>

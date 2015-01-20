@@ -34,8 +34,39 @@ class TrainingController extends Controller{
     }
 
     public function add(){
+        var_dump($_FILES['xml']);
         if(isset($_FILES['xml'])){
-            $Training = new Training(/* tutaj xml z formularza ziomeczku */);
+            echo $_FILES['xml']['type'];
+            if ($_FILES['xml']['error'] > 0)
+            {
+                echo 'problem: ';
+                switch ($_FILES['xml']['error'])
+                {
+                    // jest większy niż domyślny maksymalny rozmiar,
+                    // podany w pliku konfiguracyjnym
+                    case 1: {echo 'Rozmiar pliku jest zbyt duży.'; break;}
+
+                    // jest większy niż wartość pola formularza
+                    // MAX_FILE_SIZE
+                    case 2: {echo 'Rozmiar pliku jest zbyt duży.'; break;}
+
+                    // plik nie został wysłany w całości
+                    case 3: {echo 'Plik wysłany tylko częściowo.'; break;}
+
+                    // plik nie został wysłany
+                    case 4: {echo 'Nie wysłano żadnego pliku.'; break;}
+
+                    // pozostałe błędy
+                    default: {echo 'Wystąpił błąd podczas wysyłania.';
+                    break;}
+                }
+            }
+            elseif($_FILES['xml']['type'] != 'ima/jpeg') {
+                echo 'Nieodpowiedni typ pliku';
+            }
+            else{
+                $Training = new Training(file_get_contents($_FILES['xml']['tmp_name']));
+            }
         }
         require 'application/views/training/add.phtml';
     }
