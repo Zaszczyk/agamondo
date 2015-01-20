@@ -61,11 +61,20 @@ class TrainingController extends Controller{
                     break;}
                 }
             }
-            elseif($_FILES['xml']['type'] != 'ima/jpeg') {
+            elseif($_FILES['xml']['type'] != 'text/xml') {
                 echo 'Nieodpowiedni typ pliku';
             }
             else{
                 $Training = new Training(file_get_contents($_FILES['xml']['tmp_name']));
+                $TrainingModel = $this->loadModel('TrainingModel');
+                try{
+                    $TrainingModel->addTraining($_SESSION['id'], $_FILES['xml'], $Training);
+                    $this->Return['type'] = 0;
+                    $this->Return['text'] = 'Trening został zapisany.';
+                }
+                catch(PDOException $e){
+                    echo $e;
+                }
             }
         }
         require 'application/views/training/add.phtml';
