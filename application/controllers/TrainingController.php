@@ -21,6 +21,11 @@ class TrainingController extends Controller{
 
         require 'application/views/training/index.phtml';
     }
+    public function display_all(){
+        $Results = $this->TrainingModel->getAllTrainings();
+
+        require 'application/views/training/display_all.phtml';
+    }
 
     public function display($id){
         if(!ctype_digit($id)){

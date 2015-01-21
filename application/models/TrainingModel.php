@@ -11,7 +11,7 @@ class TrainingModel extends Model{
 
     public function getAllTraining()
     {
-        $sql = "SELECT id, distance, time, calories FROM trainings WHERE user_id= :uid";
+        $sql = "SELECT id, xml, title, distance, time FROM trainings WHERE user_id= :uid ORDER BY id DESC";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':uid', $_SESSION['id']);
         $query->execute();
