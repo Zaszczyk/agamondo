@@ -70,7 +70,7 @@ class TrainingController extends Controller{
 
                 $TrainingModel = $this->loadModel('TrainingModel');
                 try{
-                    $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $title);
+                    $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title']);
                     $this->Return['type'] = 0;
                     $this->Return['text'] = 'Trening został zapisany.';
                 }
