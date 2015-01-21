@@ -773,12 +773,15 @@ section h3 span{
 /* FORMS */
 .no_training-form-container{
     height: 300px;
+    text-align: center;
 }
 .no_training-form-container h4{
-    font-size:40px;
+    font-size:35px;
     color:white;
-    text-align: center;
-    margin-top:30px;
+    margin-top:20px;
+}
+.no_training-form-container img{
+    margin: 20px auto;
 }
 .no_training-button{
     margin: 50px auto;
