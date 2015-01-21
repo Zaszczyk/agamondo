@@ -9,16 +9,6 @@ class TrainingModel extends Model{
         $this->_Db = $Db;
     }
 
-    public function getAllTraining()
-    {
-        $sql = "SELECT id, xml, title, distance, time FROM trainings WHERE user_id= :uid ORDER BY id DESC";
-        $query = $this->_Db->prepare($sql);
-        $query->bindParam(':uid', $_SESSION['id']);
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
     public function getTrainings($page, $perPage){
 
         $offset = $perPage * ($page - 1);
@@ -96,7 +86,7 @@ class TrainingModel extends Model{
 
     public function deleteTraining($training_id)
     {
-        $sql = "DELETE FROM training WHERE id = :training_id WHERE user_id= :uid";
+        $sql = "DELETE FROM trainings WHERE id = :training_id WHERE user_id= :uid";
         $query = $this->_Db->prepare($sql);
         $parameters = array(':training_id' => $training_id);
         $query->bindParam(':uid', $_SESSION['id']);
@@ -113,14 +103,6 @@ class TrainingModel extends Model{
         $query->execute($parameters);
 
         return $query->fetch();
-    }
-
-    public function updateTraining($distance, $t_time, $calories, $training_id)
-    {
-        $sql = "UPDATE training SET distance = :distance, t_time = :t_time, calories = :calories WHERE id = :training_id AND user_id= :uid";
-        $query = $this->_Db->prepare($sql);
-        $parameters = array(':distance' => $distance, ':t_time' => $t_time, ':calories' => $calories, ':training_id' => $training_id, ':uid' => $_SESSION['id']);
-        $query->execute($parameters);
     }
 
     public function getAmountOfTraining()

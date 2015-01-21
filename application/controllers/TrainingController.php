@@ -119,4 +119,15 @@ class TrainingController extends Controller{
         require 'application/views/training/add.phtml';
     }
 
+    public function delete($id){
+        if(!ctype_digit($id)){
+            $this->error404();
+            return false;
+        }
+
+        $Results = $this->TrainingModel->deleteTraining($id);
+
+        $this->trainings(1);
+    }
+
 }
