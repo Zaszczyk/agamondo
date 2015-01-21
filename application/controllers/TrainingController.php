@@ -21,6 +21,21 @@ class TrainingController extends Controller{
 
         require 'application/views/training/index.phtml';
     }
+
+    public function trainings($page){
+        if(!ctype_digit($page)){
+            $page = 1;
+        }
+
+        $Results = $this->TrainingModel->getTrainings($page, 3);
+
+        if(empty($Results) && $page != 1)
+            $this->error404();
+
+        else
+            require 'application/views/training/display_all.phtml';
+    }
+
     public function display_all(){
         $Results = $this->TrainingModel->getAllTrainings();
 

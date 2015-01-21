@@ -68,6 +68,10 @@ class Controller{
         require 'application/views/auth/login.phtml';
     }
 
+    public function error404(){
+        require 'application/views/layouts/error_404.phtml';
+    }
+
     public function __destruct(){
 
         if($_SESSION['logged'] == 1)

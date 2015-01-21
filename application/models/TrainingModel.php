@@ -18,6 +18,20 @@ class TrainingModel extends Model{
 
         return $query->fetchAll();
     }
+
+    public function getTrainings($page, $limit){
+
+        $offset = $limit * ($page - 1);
+        $sql = "SELECT id, xml, title, distance, time FROM trainings WHERE user_id= :uid ORDER BY id DESC LIMIT :limit OFFSET :offset";
+        $query = $this->_Db->prepare($sql);
+        $query->bindParam(':uid', $_SESSION['id'], PDO::PARAM_INT);
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $query->bindParam(':offset', $offset,PDO::PARAM_INT );
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
     public function getLastTrainings()
     {
         $sql = "SELECT `trainings`.id,`trainings`.xml,`trainings`.title,`trainings`.distance, `trainings`.time FROM `trainings`
