@@ -28,6 +28,9 @@ class Training{
                     return $this->distance = $exp->nodeValue;
             }
         }
+
+        if(empty($this->distance))
+            throw new Exception('Plik nie zawiera dystansu.');
     }
 
     public function getCalories(){
@@ -41,6 +44,9 @@ class Training{
                     return $this->calories = $exp->nodeValue;
             }
         }
+
+        if(empty($this->calories))
+            throw new Exception('Plik nie zawiera kalorii.');
     }
 
     public function getTime(){
@@ -60,6 +66,9 @@ class Training{
                 }
             }
         }
+
+        if(empty($this->time))
+            throw new Exception('Plik nie zawiera czasu.');
     }
 
     public function getDate(){
@@ -78,6 +87,9 @@ class Training{
                 }
             }
         }
+
+        if(empty($this->date))
+            throw new Exception('Plik nie zawiera kalorii.');
     }
 
     public function getTitle(){

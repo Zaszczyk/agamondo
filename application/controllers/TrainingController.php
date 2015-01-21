@@ -28,6 +28,7 @@ class TrainingController extends Controller{
         }
 
         $Results = $this->TrainingModel->getTrainings($page, 3);
+        $Pagination = $this->TrainingModel->getTrainingsPagination($page, 3);
 
         if(empty($Results) && $page != 1)
             $this->error404();
@@ -53,51 +54,67 @@ class TrainingController extends Controller{
         require 'application/views/training/display.phtml';
     }
 
+    private function _checkAddingErrors(){
+        if ($_FILES['xml']['error'] > 0){
+            switch($_FILES['xml']['error']){
+                // jest większy niż domyślny maksymalny rozmiar,
+                // podany w pliku konfiguracyjnym
+                case 1: {
+                    throw new Exception('Rozmiar pliku jest zbyt duży.');
+                }
+
+                // jest większy niż wartość pola formularza
+                // MAX_FILE_SIZE
+                case 2: {
+                    throw new Exception('Rozmiar pliku jest zbyt duży.');
+                }
+
+                // plik nie został wysłany w całości
+                case 3: {
+                    throw new Exception('Plik wysłany tylko częściowo.');
+                }
+
+                // plik nie został wysłany
+                case 4: {
+                    throw new Exception('Nie wysłano żadnego pliku.');
+                }
+
+                // pozostałe błędy
+                default: {
+                    throw new Exception('Wystąpił błąd podczas wysyłania.');
+                }
+            }
+        }
+        elseif($_FILES['xml']['type'] != 'text/xml') {
+            throw new Exception('Nieodpowiedni typ pliku');
+        }
+    }
+
     public function add(){
         if(isset($_FILES['xml'])){
-            echo $_FILES['xml']['type'];
-            if ($_FILES['xml']['error'] > 0)
-            {
-                echo 'problem: ';
-                switch ($_FILES['xml']['error'])
-                {
-                    // jest większy niż domyślny maksymalny rozmiar,
-                    // podany w pliku konfiguracyjnym
-                    case 1: {echo 'Rozmiar pliku jest zbyt duży.'; break;}
 
-                    // jest większy niż wartość pola formularza
-                    // MAX_FILE_SIZE
-                    case 2: {echo 'Rozmiar pliku jest zbyt duży.'; break;}
+            try{
+                $this->_checkAddingErrors();
 
-                    // plik nie został wysłany w całości
-                    case 3: {echo 'Plik wysłany tylko częściowo.'; break;}
-
-                    // plik nie został wysłany
-                    case 4: {echo 'Nie wysłano żadnego pliku.'; break;}
-
-                    // pozostałe błędy
-                    default: {echo 'Wystąpił błąd podczas wysyłania.';
-                    break;}
-                }
-            }
-            elseif($_FILES['xml']['type'] != 'text/xml') {
-                echo 'Nieodpowiedni typ pliku';
-            }
-            else{
                 $xml = file_get_contents($_FILES['xml']['tmp_name']);
+                if(mb_strlen($xml) < 50)
+                    throw new Exception('Plik nie zawiera treningu.');
+
                 $Training = new Training($xml);
-                $title = 'bla';
 
                 $TrainingModel = $this->loadModel('TrainingModel');
-                try{
-                    $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title']);
-                    $this->Return['type'] = 0;
-                    $this->Return['text'] = 'Trening został zapisany.';
-                }
-                catch(PDOException $e){
-                    echo $e;
-                }
+                $id = $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title']);
+
+                header('Location: '.Config::PATH.'training/display/'.$id);
             }
+            catch(PDOException $e){
+                echo $e;
+            }
+            catch(Exception $e){
+                $resp['type'] = 0;
+                $resp['text'] = $e->getMessage();
+            }
+
         }
         require 'application/views/training/add.phtml';
     }

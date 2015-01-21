@@ -262,7 +262,6 @@ button:hover{
 .user-nav > li > ul > li{
     height:40px;
     width:180px;
-    padding: 10px 20px;
     background-color: #ffffff;
 }
 .user-nav > li > ul > li > a{
@@ -300,6 +299,23 @@ button:hover{
     border: 1px solid #d3d3d3;
     border-bottom: none;
 }
+
+#avatar-li > ul > li > a > div{
+    width: 100%;
+    padding: 10px 0;
+    height: 40px;
+    -webkit-transition: all 0.2s ease 0s;
+    -moz-transition: all 0.2s ease 0s;
+    -ms-transition: all 0.2s ease 0s;
+    -o-transition: all 0.2s ease 0s;
+    transition: all 0.2s ease 0s;
+}
+
+#avatar-li > ul > li > a > div:hover{
+    color: #fff;
+}
+
+
 #avatar{
     margin-left:10px;
     top:50%;
@@ -932,5 +948,6 @@ footer,#activity-footer {
     height: 100%;
 }
 
-.aspect-ratio-16-9 {
+.aspect-ratio-16-9{
     padding-top: 56.25% !important;
+}

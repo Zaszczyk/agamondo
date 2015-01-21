@@ -19,17 +19,51 @@ class TrainingModel extends Model{
         return $query->fetchAll();
     }
 
-    public function getTrainings($page, $limit){
+    public function getTrainings($page, $perPage){
 
-        $offset = $limit * ($page - 1);
-        $sql = "SELECT id, xml, title, distance, time FROM trainings WHERE user_id= :uid ORDER BY id DESC LIMIT :limit OFFSET :offset";
+        $offset = $perPage * ($page - 1);
+        $sql = "SELECT id, xml, title, distance, time FROM trainings WHERE user_id= :uid ORDER BY id DESC LIMIT :perpage OFFSET :offset";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':uid', $_SESSION['id'], PDO::PARAM_INT);
-        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $query->bindParam(':perpage', $perPage, PDO::PARAM_INT);
         $query->bindParam(':offset', $offset,PDO::PARAM_INT );
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    public function getTrainingsCount(){
+        $sql = 'SELECT count(*) AS il FROM trainings WHERE user_id= :uid';
+        $query = $this->_Db->prepare($sql);
+        $query->bindParam(':uid', $_SESSION['id'], PDO::PARAM_INT);
+        $query->execute();
+
+        $ret = $query->fetch();
+        return $ret['il'];
+    }
+
+    public function getTrainingsPagination($page, $perPage){
+
+        $count = $this->getTrainingsCount();
+
+        $string = '';
+        $pages = ceil($count/$perPage);
+
+        if($page-1 == 1 || $page > 2)
+            $string = '<li class="pagination-first"><a href="training/trainings/1">&laquo;  &laquo; Pierwsza</a></li>';
+
+        if($page > 2)
+            $string .= '<li class="pagination-previous"><a href="training/trainings/'.($page-1).'">&laquo; Poprzednia</a></li>';
+
+        $string .= '<li class="current">'.(($page-1)*$perPage+1).'-'.($page*$perPage > $count ? $count : $page*$perPage).'/'.$count.'</li>';
+
+        if($page < $pages-1)
+            $string .= '<li class="pagination-next"><a href="training/trainings/'.($page+1).'">Następna &raquo;</a></li>';
+
+        if($pages > ($page+1) || $page+1 == $pages)
+            $string .= '<li class="pagination-last"><a href="training/trainings/'.$pages.'">Ostatnia &raquo;  &raquo;</a></li>';
+
+        return $string;
     }
 
     public function getLastTrainings()
@@ -56,6 +90,8 @@ class TrainingModel extends Model{
         $query->bindParam(':date',$date);
         $query->bindParam(':title', $title);
         $query->execute();
+
+        return $this->_Db->lastInsertId();
     }
 
     public function deleteTraining($training_id)
