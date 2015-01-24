@@ -764,6 +764,44 @@ section h3 span{
     background: url("../img/3.jpg");
     background-size: cover;
 }
+/* SUMMATION */
+
+
+/*div.domtab{
+    padding:0 3em;
+    width:80%;
+    font-size:90%;
+    height: 400px;
+}*/
+ul.domtabs{
+    width:720px;
+    height:75px;
+    margin: 0 0 15px 15px;
+}
+ul.domtabs li{
+    float:left;
+    padding:0 .5em 0 0;
+}
+
+#domtabprintview{
+    float:right;
+    padding-right:1em;
+    text-align:right;
+}
+
+ul.prevnext{
+    float:left;
+    width:100%;
+}
+ul.prevnext li{
+    float:left;
+    width:49%;
+}
+ul.prevnext li.next{
+    float:right;
+    text-align:right;
+}
+
 .summation{
     width:1185px;
     margin: 100px auto;
@@ -772,9 +810,10 @@ section h3 span{
     color:#2C4143 ;
     font-family:'Audiowide';
     font-size:25px;
+    margin-bottom:30px;
 }
 .summation-button{
-    margin:50px 0 0 50px;
+    margin-bottom:15px;
 }
 /* LOGIN AND SIGN UP PAGE */
 #login, #signup{

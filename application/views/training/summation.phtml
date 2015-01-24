@@ -1,14 +1,101 @@
+<script type="text/javascript" src="static/js/domtab.js"></script>
+<script type="text/javascript">
+    document.write('<style type="text/css">');
+    document.write('div.domtab div{display:none;}<');
+    document.write('/s'+'tyle>');
+</script>
+
+
+
 <div class="summation">
     <h3>Miesięczne podsumowanie profilu:</h3>
-    <div class="summation-button">
-        <h4>Wybierz miesiąc</h4>
-        <button>Styczeń</button>
-        <button>Luty</button>
-        <button>Marzec</button>
+    <div id="other" class="domtab doprevnext">
+        <ul class="domtabs">
+            <li><a href="#t1"><button class="summation-button">Styczeń</button></a></li>
+            <li><a href="#t2"><button class="summation-button">Luty</button></a></li>
+            <li><a href="#t3"><button class="summation-button">Marzec</button></a></li>
+            <li><a href="#t4"><button class="summation-button">Kwiecień</button></a></li>
+            <li><a href="#t5"><button class="summation-button">Maj</button></a></li>
+            <li><a href="#t6"><button class="summation-button">Czerwiec</button></a></li>
+            <br/>
+            <li><a href="#t7"><button>Lipiec</button></a></li>
+            <li><a href="#t8"><button>Sierpień</button></a></li>
+            <li><a href="#t9"><button>Wrzesień</button></a></li>
+            <li><a href="#t10"><button>Październik</button></a></li>
+            <li><a href="#t11"><button>Listopad</button></a></li>
+            <li><a href="#t12"><button>Grudzień</button></a></li>
+        </ul>
+        <?php
+            $month = Array('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Licpiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień');
+            for($i = 1; $i<=12; $i++) {
+                ?>
+                <div>
+                    <h3><a name="t<?php echo $i?>" id="t<?php echo $i?>"><?php echo $month[$i-1]?>:</a></h3>
+                    <p>Treningów w miesiącu:
+                        <?php
+                        echo $Results[$i-1]['how_many'];
+                        if($Results[$i-1]['how_many']==0)
+                            echo 0;
+                        ?>
+                    </p>
+                    <p>Dystans całkowity:
+                        <?php
+                            echo $Results[$i-1]['distance'];
+                            if($Results[$i-1]['distance']==0)
+                                echo 0;
+                        ?>
+                        km
+                    </p>
+                    <p>Najdłuższy trening(dystans):
+                        <?php
+                        echo $Results[$i-1]['max_distance'];
+                        if($Results[$i-1]['max_distance']==0)
+                            echo 0;
+                        ?>
+                        km
+                    </p>
+                    <p>Czas całkowity:
+                        <?php
+                            echo $Results[$i-1]['sum_time'];
+                            if($Results[$i-1]['sum_time']==0)
+                                echo '00:00:00';
+                        ?>
+                    </p>
+                    <p>Najdłuższy trening(czas):
+                        <?php
+                        echo $Results[$i-1]['max_time'];
+                        if($Results[$i-1]['max_time']==0)
+                            echo '00:00:00';
+                        ?>
+                    </p>
+                    <p>Spalone kalorie:
+                        <?php
+                        echo $Results[$i-1]['sum_calories'];
+                        if($Results[$i-1]['sum_calories']==0)
+                            echo 0;
+                        ?>
+                    </p>
+                    <p><a href="#top">back to menu</a></p>
+                </div>
+            <?php
+            }
+        ?>
+        <!--<div>
+            <h2><a name="t2" id="t2">Proof 2</a></h2>
+            <p>Test to prove that more than one menu is possible</p>
+            <p><a href="#top">back to menu</a></p>
+        </div>
+        <div>
+            <h2><a name="t3" id="t3">Proof 3</a></h2>
+            <p>Test to prove that more than one menu is possible</p>
+            <p><a href="#top">back to menu</a></p>
+        </div>
+        <div>
+            <h3><a name="t<?php /*echo 1*/?>" id="t4">Styczeń:</a></h3>
+            <p>Dystans całkowity: <?php /*echo $Results[0]['distance'];*/?></p>
+            <p>Czas całkowity: <?php /*echo $Results[0]['sum_time'];*/?></p>
+            <p><a href="#top">back to menu</a></p>
+        </div>-->
     </div>
-    <div>
-        <h4>Styczeń</h4>
-        <p>Dystans całkowity: <?php echo $Results[0]['distance'];?></p>
-        <p>Czas całkowity: <?php echo $Results[0]['sum_time'];?></p>
-    </div>
+
 </div>

@@ -106,7 +106,11 @@ class TrainingModel extends Model{
         return $query->fetch();
     }
     public function getTrainingMonth($month, $year){
-        $sql = "SELECT distance, SEC_TO_TIME(SUM(TIME_TO_SEC(time))) AS sum_time FROM trainings WHERE MONTH(date) = :month AND YEAR(date) = :year AND user_id= :uid";
+        $sql = "SELECT distance, SEC_TO_TIME(SUM(TIME_TO_SEC(time))) AS sum_time, count(id) AS how_many,
+                SEC_TO_TIME(MAX(TIME_TO_SEC(time))) AS max_time, MAX(distance) AS max_distance,
+                SUM(calories) AS sum_calories
+                FROM trainings
+                WHERE MONTH(date) = :month AND YEAR(date) = :year AND user_id= :uid";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':month', $month);
         $query->bindParam(':year', $year);

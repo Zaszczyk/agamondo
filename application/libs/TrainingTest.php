@@ -9,7 +9,7 @@
 require '../libs/Functions.class.php';
 require '../libs/Training.class.php';
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 
 class TrainingTest extends PHPUnit_Framework_TestCase {
 

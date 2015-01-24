@@ -92,7 +92,7 @@ class TrainingController extends Controller{
 
     public function add(){
         error_reporting(E_ALL ^ E_WARNING);
-        ini_set('display_errors', 1);
+        ini_set('display_errors', 0);
         if(isset($_FILES['xml'])){
 
             try{
@@ -120,14 +120,12 @@ class TrainingController extends Controller{
         }
         require 'application/views/training/add.phtml';
     }
-    public function summation($year,$month){
+    public function summation($year){
         if(!ctype_digit($year)){
             $year = 2015;
         }
-        if(!ctype_digit($month)){
-            $month = 1;
-        }
-        $Results = $this->TrainingModel->getTrainingMonth($month,$year);
+        for($i = 1; $i<=12; $i++)
+            $Results[] = $this->TrainingModel->getTrainingMonth($i,$year);
         require 'application/views/training/summation.phtml';
     }
     public function delete($id){
