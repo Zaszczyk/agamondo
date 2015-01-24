@@ -25,7 +25,7 @@ class Training{
             if ($this->xmlReader->nodeType == XMLReader::ELEMENT) {
                 $exp = $this->xmlReader->expand();
                 if ($exp->nodeName == 'DistanceMeters')
-                    return $this->distance = $exp->nodeValue;
+                    return $this->distance = ($exp->nodeValue/1000);
             }
         }
 
@@ -87,7 +87,7 @@ class Training{
                         $date[10] = ' ';
                         $date = substr($date, 0, -5);
                         // <Id>2014-06-08T07:55:42.000Z</Id>
-                        return $this->date = DateTime::createFromFormat("Y-m-d h:m:s", $date)->format('Y-m-d G:i:s');
+                        return $this->date = DateTime::createFromFormat("Y-m-d h:i:s", $date)->format('Y-m-d G:i:s');
                     }
                     else{
                         return $this->date = DateTime::createFromFormat('D M j G:i:s T Y', $date)->format('Y-m-d G:i:s');

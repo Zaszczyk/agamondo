@@ -121,11 +121,12 @@ class TrainingController extends Controller{
         require 'application/views/training/add.phtml';
     }
     public function summation($year){
-        if(!ctype_digit($year)){
+        if(!ctype_digit($year)) {
             $year = 2015;
         }
         for($i = 1; $i<=12; $i++)
-            $Results[] = $this->TrainingModel->getTrainingMonth($i,$year);
+            $Results[] = $this->TrainingModel->getTrainingMonth($i,$_POST['year']);
+            $year = $_POST['year'];
         require 'application/views/training/summation.phtml';
     }
     public function delete($id){

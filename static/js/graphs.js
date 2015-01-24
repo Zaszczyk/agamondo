@@ -30,7 +30,6 @@ function getPoint() {
         var lon = $(this).find("LongitudeDegrees").text();
         var altitude = parseInt($(this).find("AltitudeMeters").text());
         dif_altitude=altitude-last_altitude;
-        console.log(dif_altitude);
         if(altitude !=0 && last_altitude!=0 && dif_altitude>0)
             count_altitude = count_altitude + dif_altitude;
         last_altitude = altitude;
@@ -40,7 +39,7 @@ function getPoint() {
             lat2 = lat;
             lon2 = lon;
         }
-
+        console.log(altitude);
         distance2 = getDistanceFromLatLonInKm(lat2, lon2, lat, lon);
         if(help == 0)
             distance2 = 0.00001;
@@ -57,6 +56,8 @@ function getPoint() {
             }
             else
                 sub = sub_time - sub_time2;
+                if(sub<1)
+                    sub = 1;
             speed = distance2 / (sub*0.000277);
             console.log(speed);
             sub_time2 = sub_time;

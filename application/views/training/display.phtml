@@ -88,7 +88,7 @@
         </div>
         <div class="activity-content-right">
             <div class="activity-content-right-distance">
-                <h3><?php echo $Results['distance']/1000; ?> km</h3>
+                <h3><?php echo $Results['distance']; ?> km</h3>
                 <h6>Dystans</h6>
             </div>
             <div class="activity-content-right-time">
@@ -113,7 +113,7 @@
                     <h4><?php
                         list($hour, $minute, $second) = preg_split('/[: -]/', $Results['time']);
                         $time =$hour + round(($minute/60),2);
-                        $Average =  round((($Results['distance']/1000)/$time),1);
+                        $Average =  round((($Results['distance'])/$time),1);
                         echo $Average;?> km/h</h4>
 
                     <h4 id="max_speed"></h4>

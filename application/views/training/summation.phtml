@@ -10,6 +10,11 @@
 <div class="summation">
     <h3>Miesięczne podsumowanie profilu:</h3>
     <div id="other" class="domtab doprevnext">
+            <form id="summnation" action="training/summation/" method="post">
+                <label>Wpisz rok:</label>
+                <input id="year" type="text" name="year" class="input-text" placeholder="Rok">
+                <button type="submit" value="send">Wyślij</button>
+            </form>
         <ul class="domtabs">
             <li><a href="#t1"><button class="summation-button">Styczeń</button></a></li>
             <li><a href="#t2"><button class="summation-button">Luty</button></a></li>
@@ -26,11 +31,17 @@
             <li><a href="#t12"><button>Grudzień</button></a></li>
         </ul>
         <?php
-            $month = Array('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Licpiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień');
+            $month = Array('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień');
             for($i = 1; $i<=12; $i++) {
                 ?>
                 <div>
-                    <h3><a name="t<?php echo $i?>" id="t<?php echo $i?>"><?php echo $month[$i-1]?>:</a></h3>
+                    <h3><a name="t<?php echo $i?>" id="t<?php echo $i?>">
+                            <?php
+                                echo $month[$i-1];
+                                echo " ";
+                                echo $year;
+                            ?>
+                            :</a></h3>
                     <p>Treningów w miesiącu:
                         <?php
                         echo $Results[$i-1]['how_many'];
@@ -40,7 +51,7 @@
                     </p>
                     <p>Dystans całkowity:
                         <?php
-                            echo $Results[$i-1]['distance'];
+                        echo number_format($Results[$i-1]['distance'], 2, '.', ' ');
                             if($Results[$i-1]['distance']==0)
                                 echo 0;
                         ?>
@@ -48,7 +59,7 @@
                     </p>
                     <p>Najdłuższy trening(dystans):
                         <?php
-                        echo $Results[$i-1]['max_distance'];
+                        echo number_format($Results[$i-1]['max_distance'], 2, '.', ' ');
                         if($Results[$i-1]['max_distance']==0)
                             echo 0;
                         ?>
@@ -57,14 +68,14 @@
                     <p>Czas całkowity:
                         <?php
                             echo $Results[$i-1]['sum_time'];
-                            if($Results[$i-1]['sum_time']==0)
+                            if($Results[$i-1]['sum_time']==NULL)
                                 echo '00:00:00';
                         ?>
                     </p>
                     <p>Najdłuższy trening(czas):
                         <?php
                         echo $Results[$i-1]['max_time'];
-                        if($Results[$i-1]['max_time']==0)
+                        if($Results[$i-1]['max_time']==NULL)
                             echo '00:00:00';
                         ?>
                     </p>

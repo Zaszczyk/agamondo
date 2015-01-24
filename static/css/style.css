@@ -801,7 +801,9 @@ ul.prevnext li.next{
     float:right;
     text-align:right;
 }
-
+#summination{
+    display: block;
+}
 .summation{
     width:1185px;
     margin: 100px auto;
@@ -900,15 +902,27 @@ ul.prevnext li.next{
 .form-footer a:hover{
     text-decoration: underline;
 }
-label{
+label, .summation label{
     display: block;
     width: 260px;
     padding: 8px 20px;
     color: #FEFEFE;
     font-size: 16px;
+    float:left;
 }
-
-
+.summation label{
+    color: #000000;
+    width:120px;
+}
+#year{
+    width: 150px;
+    padding: 8px 5px;
+    border: 1px solid silver;
+    font-size:14px;
+    border-radius: 10px;
+    display: inline;
+    margin:5px 15px 15px 15px;
+}
 #username, #password, #firstname, #lastname, #email, #password2, .input-text, #name, #weight, #height {
     display: block;
     width: 360px;
