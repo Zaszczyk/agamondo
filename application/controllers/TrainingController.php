@@ -85,9 +85,9 @@ class TrainingController extends Controller{
                 }
             }
         }
-        elseif($_FILES['xml']['type'] != 'text/xml') {
+        /*elseif($_FILES['xml']['type'] != 'text/xml') {
             throw new Exception('Nieodpowiedni typ pliku');
-        }
+        }*/
     }
 
     public function add(){
@@ -103,7 +103,7 @@ class TrainingController extends Controller{
                 $Training = new Training($xml);
 
                 $TrainingModel = $this->loadModel('TrainingModel');
-                $id = $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title']);
+                $id = $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title'], $_POST['description']);
 
                 header('Location: '.Config::PATH.'training/display/'.$id);
             }
@@ -118,7 +118,16 @@ class TrainingController extends Controller{
         }
         require 'application/views/training/add.phtml';
     }
-
+    public function summation($year,$month){
+        if(!ctype_digit($year)){
+            $year = 2015;
+        }
+        if(!ctype_digit($month)){
+            $month = 1;
+        }
+        $Results = $this->TrainingModel->getTrainingMonth($month,$year);
+        require 'application/views/training/summation.phtml';
+    }
     public function delete($id){
         if(!ctype_digit($id)){
             $this->error404();

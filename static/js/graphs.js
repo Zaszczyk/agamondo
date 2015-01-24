@@ -17,6 +17,9 @@ function getPoint() {
     var speed = 0;
     var distance2 = 0;
     var counter = 0;
+    var sub_time = 0;
+    var sub_time2 = 0;
+    var sub = 0;
     var how_many_points = $(xml).find("Position").length;
     var co_ile_przesiac = Math.round(how_many_points/500);
     if(co_ile_przesiac==0)
@@ -44,10 +47,22 @@ function getPoint() {
         help = 1;
         if(distance2>0.03)
             console.log("nieporzadany punkt");
-        else
-            speed = distance2/0.000277;
-            if(speed>max_speed)
-                max_speed = speed;
+        else {
+            var str = $(this).find("Time").text();
+            var res = str.split(":");
+            sub_time = res[2].substring(0, 2);
+            if(sub_time<sub_time2){
+                sub_time +=60;
+                sub = sub_time - sub_time2;
+            }
+            else
+                sub = sub_time - sub_time2;
+            speed = distance2 / (sub*0.000277);
+            console.log(speed);
+            sub_time2 = sub_time;
+        }
+        if(speed>max_speed)
+            max_speed = speed;
         distance = distance + getDistanceFromLatLonInKm(lat2, lon2, lat, lon);
         if(counter%co_ile_przesiac == 0)
             points.push([distance, speed]);
@@ -163,7 +178,6 @@ function draw(d1,d2) {
             } else {
                 y = p1[1] + (p2[1] - p1[1]) * (pos.x - p1[0]) / (p2[0] - p1[0]);
             }
-            console.log(y);
             legends.eq(i).text(series.label.replace(/=.*/, "= " + y.toFixed(1)));
         }
     }

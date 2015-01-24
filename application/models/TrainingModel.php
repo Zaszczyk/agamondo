@@ -67,10 +67,10 @@ class TrainingModel extends Model{
         return $query->fetchAll();
     }
 
-    public function addTraining($user_id, $xml, $date, $time, $distance, $calories, $title)
+    public function addTraining($user_id, $xml, $date, $time, $distance, $calories, $title, $description)
     {
 
-        $sql = "INSERT INTO trainings (user_id, xml, distance, time, calories, date, title) VALUES (:user_id, :xml, :distance, :time, :calories, :date, :title)";
+        $sql = "INSERT INTO trainings (user_id, xml, distance, time, calories, date, title, description) VALUES (:user_id, :xml, :distance, :time, :calories, :date, :title, :description)";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':user_id', $user_id);
         $query->bindParam(':xml',$xml,PDO::PARAM_LOB);
@@ -79,6 +79,7 @@ class TrainingModel extends Model{
         $query->bindParam(':calories',$calories);
         $query->bindParam(':date',$date);
         $query->bindParam(':title', $title);
+        $query->bindParam(':description', $description);
         $query->execute();
 
         return $this->_Db->lastInsertId();
@@ -104,7 +105,16 @@ class TrainingModel extends Model{
 
         return $query->fetch();
     }
+    public function getTrainingMonth($month, $year){
+        $sql = "SELECT distance, SEC_TO_TIME(SUM(TIME_TO_SEC(time))) AS sum_time FROM trainings WHERE MONTH(date) = :month AND YEAR(date) = :year AND user_id= :uid";
+        $query = $this->_Db->prepare($sql);
+        $query->bindParam(':month', $month);
+        $query->bindParam(':year', $year);
+        $query->bindParam(':uid',$_SESSION['id']);
+        $query->execute();
 
+        return $query->fetch();
+    }
     public function getAmountOfTraining()
     {
         $sql = "SELECT COUNT(id) AS amount_of_training FROM training AND user_id= :uid";

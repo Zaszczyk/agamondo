@@ -3,23 +3,24 @@
         <div class="form-container">
             <form  enctype="multipart/form-data" action="training/add/" method="post">
                 <div class = "form-heading" >
-                    <h3>Zaloguj się</h3>
+                    <h3>Dodaj trening</h3>
                 </div>
                 <?php
                     if($resp['type'] === 0){
-                        echo '<div class="alert alert-danger">'.$resp['text'].'</div>';
+                        echo '<div class="validation-summary-errors"><p>'.$resp['text'].'</p></div>';
                     }
                     elseif($resp['type'] === 1){
-                        echo '<div class="alert alert-success">'.$resp['text'].'</div>';
+                        echo '<div class="validation-summary-errors"><p>'.$resp['text'].'</p></div>';
                     }
                 ?>
                 <label>Tytuł treningu</label>
                 <input type="text" name="title" class="input-text" placeholder="Tytuł treningu">
 
                 <label>Plik TCX</label>
-                <input type="hidden" name="max_file_size" value="5120000" />
+                <input type="hidden" name="max_file_size" value="5120000000000000000" />
                 <input id="username" type="file" name="xml">
-
+                <label>Opis treningu</label>
+                <input type="text" name="description" class="input-text" placeholder="Opis treningu">
                 <div class="form-footer">
                     <button id="form-footer-button" type="submit" value="send">Wyślij</button>
                 </div>

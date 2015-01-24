@@ -509,12 +509,14 @@ section h3 span{
     background-color: #2C4143 ;
     border:1px solid gainsboro;
     border-bottom: none;
+    height:50px;
 
 }
 .activity-header h3{
     padding: 10px 0 10px 10px;
     color:#FEFEFE;
     font-size:24px;
+    float:left;
 }
 .activity-content{
     width:100%;
@@ -762,6 +764,18 @@ section h3 span{
     background: url("../img/3.jpg");
     background-size: cover;
 }
+.summation{
+    width:1185px;
+    margin: 100px auto;
+}
+.summation h3{
+    color:#2C4143 ;
+    font-family:'Audiowide';
+    font-size:25px;
+}
+.summation-button{
+    margin:50px 0 0 50px;
+}
 /* LOGIN AND SIGN UP PAGE */
 #login, #signup{
     height: 100vh;
@@ -894,7 +908,7 @@ label{
 
 }
 
-.validation-summary-errors ul{
+.validation-summary-errors p{
     list-style: none;
     padding: 8px 0 8px 20px;
     margin: 0;
@@ -953,4 +967,8 @@ footer,#activity-footer {
 
 .aspect-ratio-16-9{
     padding-top: 56.25% !important;
+}
+#delete{
+    float:right;
+    margin:10px 10px 5px 5px;
 }

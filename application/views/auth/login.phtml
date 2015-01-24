@@ -6,8 +6,11 @@
                     <h3>Zaloguj się</h3>
                 </div>
                 <?php
-                if($resp['type'] == 0 || $resp['type'] == 1){
-                    echo $resp['text'];
+                if($resp['type'] === 0){
+                    echo '<div class="validation-summary-errors"><p>'.$resp['text'].'</p></div>';
+                }
+                elseif($resp['type'] === 1){
+                    echo '<div class="validation-summary-errors"><p>'.$resp['text'].'</p></div>';
                 }
                 ?>
                 <label for="username">Nazwa użytkownika:</label>

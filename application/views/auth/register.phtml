@@ -6,9 +6,12 @@
                         <h3>Rejestracja</h3>
                 </div>
                 <?php
-                    echo '<pre>';
-                    print_r($resp);
-                    echo '</pre>';
+                if($resp['type'] === 0){
+                    echo '<div class="validation-summary-errors"><p>'.$resp['text'].'</p></div>';
+                }
+                elseif($resp['type'] === 1){
+                    echo '<div class="validation-summary-errors"><p>'.$resp['text'].'</p></div>';
+                }
                 ?>
                 <label>Nazwa użytkownika:</label>
                 <input type="text" placeholder="Nazwa użytkownika" id="username" name="login" autocomplete="off" value="<?php echo $value['login'];?>">
