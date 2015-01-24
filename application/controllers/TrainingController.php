@@ -85,12 +85,14 @@ class TrainingController extends Controller{
                 }
             }
         }
-        /*elseif($_FILES['xml']['type'] != 'text/xml') {
-            throw new Exception('Nieodpowiedni typ pliku');
-        }*/
+        elseif($_FILES['xml']['type'] != 'application/tcx+xml') {
+            throw new Exception('Nieodpowiedni typ pliku.');
+        }
     }
 
     public function add(){
+        error_reporting(E_ALL ^ E_WARNING);
+        ini_set('display_errors', 1);
         if(isset($_FILES['xml'])){
 
             try{

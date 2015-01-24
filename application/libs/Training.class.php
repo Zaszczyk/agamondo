@@ -82,8 +82,17 @@ class Training{
 
                 if ($exp->nodeName == 'Id'){
                     $date = $exp->nodeValue;
+                    var_dump($date[10]);
+                    if($date[10] == 'T'){
+                        $date[10] = ' ';
+                        $date = substr($date, 0, -5);
+                        // <Id>2014-06-08T07:55:42.000Z</Id>
+                        return $this->date = DateTime::createFromFormat("Y-m-d h:m:s", $date)->format('Y-m-d G:i:s');
+                    }
+                    else{
+                        return $this->date = DateTime::createFromFormat('D M j G:i:s T Y', $date)->format('Y-m-d G:i:s');
+                    }
 
-                    return $this->date = DateTime::createFromFormat('D M j G:i:s T Y', $date)->format('Y-m-d G:i:s');
                 }
             }
         }

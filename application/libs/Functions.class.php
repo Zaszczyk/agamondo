@@ -53,8 +53,7 @@ class NoCSRFException extends Exception{
 }
 
 function __autoload($classname) {
-
-    if(file_exists(__DIR__.'\\'.$classname.".class.php"))
-        require_once(__DIR__.'\\'.$classname.".class.php");
+    if(file_exists(__DIR__.'/'.$classname.".class.php"))
+        require_once(__DIR__.'/'.$classname.".class.php");
 }
 ?>

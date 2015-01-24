@@ -61,6 +61,7 @@ class ApiController extends Controller{
     }
 
     public function addTraining(){
+
         if(empty($_POST['hash']) || empty($_POST['xml'])){
             $this->Return['type'] = 0;
             $this->Return['text'] = 'Podaj parametry hash i xml.';
@@ -84,12 +85,17 @@ class ApiController extends Controller{
 
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
+
             $TrainingModel->addTraining($user_id, $xml,$Training->getDate(), $Training->getTime(), $Training->getDistance(),  $Training->getCalories(),  $Training->getTitle());
             $this->Return['type'] = 0;
             $this->Return['text'] = 'Trening został zapisany.';
         }
         catch(PDOException $e){
             echo $e;
+        }
+        catch(Exception $e){
+            $this->Return['type'] = 0;
+            $this->Return['text'] = $e->getMessage();
         }
 
     }
