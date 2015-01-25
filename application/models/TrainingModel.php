@@ -40,21 +40,31 @@ class TrainingModel extends Model{
         $pages = ceil($count/$perPage);
 
         if($page-1 == 1 || $page > 2)
-            $string = '<li class="pagination-first"><a href="training/trainings/1">&laquo;  &laquo; Pierwsza</a></li>';
+            $string = '<li class="page gradient"><a href="training/trainings/1">&laquo;  &laquo; Pierwsza</a></li>';
 
         if($page > 2)
-            $string .= '<li class="pagination-previous"><a href="training/trainings/'.($page-1).'">&laquo; Poprzednia</a></li>';
+            $string .= '<li class="page gradient"><a href="training/trainings/'.($page-1).'">&laquo; Poprzednia</a></li>';
 
-        $string .= '<li class="current">'.(($page-1)*$perPage+1).'-'.($page*$perPage > $count ? $count : $page*$perPage).'/'.$count.'</li>';
+        $string .= '<li class="page active">'.(($page-1)*$perPage+1).'-'.($page*$perPage > $count ? $count : $page*$perPage).'/'.$count.'</li>';
 
         if($page < $pages-1)
-            $string .= '<li class="pagination-next"><a href="training/trainings/'.($page+1).'">Następna &raquo;</a></li>';
+            $string .= '<li class="page gradient"><a href="training/trainings/'.($page+1).'">Następna &raquo;</a></li>';
 
         if($pages > ($page+1) || $page+1 == $pages)
-            $string .= '<li class="pagination-last"><a href="training/trainings/'.$pages.'">Ostatnia &raquo;  &raquo;</a></li>';
+            $string .= '<li class="page gradient"><a href="training/trainings/'.$pages.'">Ostatnia &raquo;  &raquo;</a></li>';
 
         return $string;
     }
+/*<div class="pagination">
+<p>with gradient</p>
+<a href="#" class="page gradient">first</a>
+<a href="#" class="page gradient">2</a>
+<a href="#" class="page gradient">3</a>
+<span class="page active">4</span>
+<a href="#" class="page gradient">5</a>
+<a href="#" class="page gradient">6</a>
+<a href="#" class="page gradient">last</a>
+</div>*/
 
     public function getLastTrainings()
     {

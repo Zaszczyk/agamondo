@@ -13,7 +13,7 @@
             <form id="summnation" action="training/summation/" method="post">
                 <label>Wpisz rok:</label>
                 <input id="year" type="text" name="year" class="input-text" placeholder="Rok">
-                <button type="submit" value="send">Wyślij</button>
+                <button type="submit" value="send">Potwierdź</button>
             </form>
         <ul class="domtabs">
             <li><a href="#t1"><button class="summation-button">Styczeń</button></a></li>
@@ -34,7 +34,7 @@
             $month = Array('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień');
             for($i = 1; $i<=12; $i++) {
                 ?>
-                <div>
+                <div id="summation-date">
                     <h3><a name="t<?php echo $i?>" id="t<?php echo $i?>">
                             <?php
                                 echo $month[$i-1];
@@ -42,49 +42,62 @@
                                 echo $year;
                             ?>
                             :</a></h3>
-                    <p>Treningów w miesiącu:
+                    <p class="summation-date-float">
                         <?php
                         echo $Results[$i-1]['how_many'];
-                        if($Results[$i-1]['how_many']==0)
-                            echo 0;
                         ?>
                     </p>
-                    <p>Dystans całkowity:
+                    <p class="summation-date-color">Treningów w miesiącu:
+
+                    </p>
+                    <p class="summation-date-float">
                         <?php
                         echo number_format($Results[$i-1]['distance'], 2, '.', ' ');
-                            if($Results[$i-1]['distance']==0)
-                                echo 0;
+                        if($Results[$i-1]['distance']==0)
+                            echo 0;
                         ?>
-                        km
+                        km</p>
+                    <p>Dystans całkowity:
+
                     </p>
-                    <p>Najdłuższy trening(dystans):
+                    <p class="summation-date-float">
                         <?php
                         echo number_format($Results[$i-1]['max_distance'], 2, '.', ' ');
                         if($Results[$i-1]['max_distance']==0)
                             echo 0;
                         ?>
-                        km
+                        km</p>
+                    <p class="summation-date-color">Najdłuższy trening(dystans):
+
                     </p>
-                    <p>Czas całkowity:
+                    <p class="summation-date-float">
                         <?php
-                            echo $Results[$i-1]['sum_time'];
-                            if($Results[$i-1]['sum_time']==NULL)
-                                echo '00:00:00';
+                        echo $Results[$i-1]['sum_time'];
+                        if($Results[$i-1]['sum_time']==NULL)
+                            echo '00:00:00';
                         ?>
                     </p>
-                    <p>Najdłuższy trening(czas):
+                    <p>Czas całkowity:
+
+                    </p>
+                    <p class="summation-date-float">
                         <?php
                         echo $Results[$i-1]['max_time'];
                         if($Results[$i-1]['max_time']==NULL)
                             echo '00:00:00';
                         ?>
                     </p>
-                    <p>Spalone kalorie:
+                    <p class="summation-date-color">Najdłuższy trening(czas):
+
+                    </p>
+                    <p class="summation-date-float">
                         <?php
                         echo $Results[$i-1]['sum_calories'];
                         if($Results[$i-1]['sum_calories']==0)
                             echo 0;
-                        ?>
+                        ?></p>
+                    <p>Spalone kalorie:
+
                     </p>
                     <p><a href="#top">back to menu</a></p>
                 </div>
