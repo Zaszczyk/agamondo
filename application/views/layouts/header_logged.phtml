@@ -36,7 +36,7 @@
                     <h3>Witaj, <?php echo $_SESSION['login']?></h3>
                 </li>
                 <li id="avatar-li">
-                    <a id="avatar-a" href="#">
+                    <a id="avatar-a" href="<?php echo Config::PATH;?>">
                         <div id="avatar">
                             <img src="static/img/avatar.jpg" alt="avatar">
                         </div>
@@ -52,12 +52,12 @@
                             <a href="auth/password/"><div>Zmień hasło</div></a>
                         </li>
                         <li>
-                            <a href="<?php /*echo Config::PATH; */?>main/logout"><div>Wyloguj</div></a>
+                            <a href="main/logout"><div>Wyloguj</div></a>
                         </li>
                     </ul>
                 </li>
             </ul>
-            <a class="logo" href="/">
+            <a class="logo" href="<?php echo Config::PATH;?>">
                 <h1><span>AGA</span>MONDO</h1>
             </a>
             <ul class="global-nav">
@@ -69,6 +69,9 @@
                 </li>
                 <li>
                     <a href="training/summation/">Podsumowanie</a>
+                </li>
+                <li>
+                    <a href="main/download/">Pobierz</a>
                 </li>
             </ul>
         </div>
