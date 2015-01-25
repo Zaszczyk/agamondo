@@ -8,6 +8,8 @@ class Training{
     public $time;
     public $date;
     public $title;
+    public $activity;
+    public $description;
 
     public function __construct($xml){/*
         $xml = str_replace('&lt;', '<', $xml);
@@ -48,6 +50,27 @@ class Training{
         if(empty($this->calories))
             throw new Exception('Plik nie zawiera kalorii.');
     }
+    /*<Activity Sport="Running">*/
+    public function getActivity(){
+        if($this->activity != null)
+            return $this->activity;
+
+        while ($this->xmlReader->read()) {
+            if ($this->xmlReader->nodeType == XMLReader::ELEMENT) {
+                $exp = $this->xmlReader->expand();
+                if ($exp->nodeName == 'Activity Sport="Running"')
+                    return $this->activity = 2;
+                elseif ($exp->nodeName == 'Activity Sport="Biking"')
+                    return $this->activity = 1;
+                else
+                    return $this->activity = 1;
+            }
+        }
+
+        if(empty($this->calories))
+            throw new Exception('Plik nie zawiera aktywnośći.');
+    }
+
 
     public function getTime(){
         if($this->time != null)
@@ -103,8 +126,14 @@ class Training{
 
     public function getTitle(){
         if($this->title != null)
-            return $this->tile;
+            return $this->title;
 
         return $this->title = 'Trening z dnia '.$this->getDate();
+    }
+    public function getDescription(){
+        if($this->description != null)
+            return $this->description;
+
+        return $this->description = 'Opis treningu dodany automatycznie, nie obsługiwany w tej wersji aplikacji';
     }
 }

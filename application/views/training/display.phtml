@@ -69,7 +69,8 @@
 
 <div class="activity">
     <div class="activity-header">
-        <h3><?php echo $Results['title'];?><!-- - Rower(rodzaj aktywności)--></h3>
+
+        <h3>Tytuł: <?php echo $Results['title'];?> - Rodzaj aktywności: <?php echo $Results['name'];?></h3>
         <a href="training/delete/<?php echo $Results['id'];?>
         " onclick="return confirm('Czy na pewno chcesz usunąć trening <?php echo $Results['title'];?>?')">
             <img id="delete"src="static/img/delete.png"/>

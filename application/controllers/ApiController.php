@@ -86,7 +86,7 @@ class ApiController extends Controller{
         $TrainingModel = $this->loadModel('TrainingModel');
         try{
 
-            $TrainingModel->addTraining($user_id, $xml,$Training->getDate(), $Training->getTime(), $Training->getDistance(),  $Training->getCalories(),  $Training->getTitle());
+            $TrainingModel->addTraining($user_id, $xml,$Training->getDate(), $Training->getTime(), $Training->getDistance(),  $Training->getCalories(),  $Training->getTitle(), $Training->getDescription(), $Training->getActivity());
             $this->Return['type'] = 0;
             $this->Return['text'] = 'Trening został zapisany.';
         }

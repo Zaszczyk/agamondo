@@ -67,10 +67,10 @@ class TrainingModel extends Model{
         return $query->fetchAll();
     }
 
-    public function addTraining($user_id, $xml, $date, $time, $distance, $calories, $title, $description)
+    public function addTraining($user_id, $xml, $date, $time, $distance, $calories, $title, $description, $activity)
     {
 
-        $sql = "INSERT INTO trainings (user_id, xml, distance, time, calories, date, title, description) VALUES (:user_id, :xml, :distance, :time, :calories, :date, :title, :description)";
+        $sql = "INSERT INTO trainings (user_id, xml, distance, time, calories, date, title, description, activity) VALUES (:user_id, :xml, :distance, :time, :calories, :date, :title, :description, :activity)";
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':user_id', $user_id);
         $query->bindParam(':xml',$xml,PDO::PARAM_LOB);
@@ -80,6 +80,7 @@ class TrainingModel extends Model{
         $query->bindParam(':date',$date);
         $query->bindParam(':title', $title);
         $query->bindParam(':description', $description);
+        $query->bindParam(':activity', $activity);
         $query->execute();
 
         return $this->_Db->lastInsertId();
@@ -87,7 +88,7 @@ class TrainingModel extends Model{
 
     public function deleteTraining($training_id)
     {
-        $sql = 'DELETE FROM trainings WHERE id = :training_id ANDgit  user_id= :uid';
+        $sql = 'DELETE FROM trainings WHERE id = :training_id AND user_id= :uid';
         $query = $this->_Db->prepare($sql);
         $query->bindParam(':training_id', $training_id);
         $query->bindParam(':uid', $_SESSION['id']);

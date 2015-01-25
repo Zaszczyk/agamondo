@@ -105,7 +105,7 @@ class TrainingController extends Controller{
                 $Training = new Training($xml);
 
                 $TrainingModel = $this->loadModel('TrainingModel');
-                $id = $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title'], $_POST['description']);
+                $id = $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title'], $_POST['description'], $Training->getActivity());
 
                 header('Location: '.Config::PATH.'training/display/'.$id);
             }
