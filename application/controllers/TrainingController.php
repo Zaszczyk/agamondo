@@ -124,20 +124,31 @@ class TrainingController extends Controller{
         if(!ctype_digit($year)) {
             $year = 2015;
         }
-
-        for($i = 1; $i<=12; $i++)
-            $Results[] = $this->TrainingModel->getTrainingMonth($i,$_POST['year']);
-        $year = $_POST['year'];
+        try{
+            for($i = 1; $i<=12; $i++)
+                $Results[] = $this->TrainingModel->getTrainingMonth($i,$_POST['year']);
+            $year = $_POST['year'];
+        }
+        catch(PDOException $e){
+            echo $e;
+        }
 
         require 'application/views/training/summation.phtml';
     }
     public function delete($id){
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
         if(!ctype_digit($id)){
             $this->error404();
             return false;
         }
-
-        $Results = $this->TrainingModel->deleteTraining($id);
+        try{
+            $Results = $this->TrainingModel->deleteTraining($id);
+        }
+        catch(PDOException $e){
+            echo $e;
+        }
 
         $this->trainings(1);
     }

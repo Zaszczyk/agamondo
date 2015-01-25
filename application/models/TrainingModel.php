@@ -87,11 +87,11 @@ class TrainingModel extends Model{
 
     public function deleteTraining($training_id)
     {
-        $sql = "DELETE FROM trainings WHERE id = :training_id WHERE user_id= :uid";
+        $sql = 'DELETE FROM trainings WHERE id = :training_id ANDgit  user_id= :uid';
         $query = $this->_Db->prepare($sql);
-        $parameters = array(':training_id' => $training_id);
+        $query->bindParam(':training_id', $training_id);
         $query->bindParam(':uid', $_SESSION['id']);
-        $query->execute($parameters);
+        $query->execute();
     }
 
     public function getTraining($training_id)
