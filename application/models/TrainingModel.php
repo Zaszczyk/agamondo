@@ -55,16 +55,6 @@ class TrainingModel extends Model{
 
         return $string;
     }
-/*<div class="pagination">
-<p>with gradient</p>
-<a href="#" class="page gradient">first</a>
-<a href="#" class="page gradient">2</a>
-<a href="#" class="page gradient">3</a>
-<span class="page active">4</span>
-<a href="#" class="page gradient">5</a>
-<a href="#" class="page gradient">6</a>
-<a href="#" class="page gradient">last</a>
-</div>*/
 
     public function getLastTrainings()
     {

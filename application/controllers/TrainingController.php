@@ -124,9 +124,10 @@ class TrainingController extends Controller{
         if(!ctype_digit($year)) {
             $year = 2015;
         }
-        $year = $_POST['year'];
+
         for($i = 1; $i<=12; $i++)
             $Results[] = $this->TrainingModel->getTrainingMonth($i,$_POST['year']);
+        $year = $_POST['year'];
 
         require 'application/views/training/summation.phtml';
     }
