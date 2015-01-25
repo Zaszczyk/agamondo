@@ -214,16 +214,22 @@ button:hover{
 .global-nav > li > a {
     box-sizing: border-box;
     display: block;
-    height: 55px;
+    height: 58px;
     line-height: 1em;
     padding: 19px 20px;
     color: darkgrey;
     cursor: pointer;
     text-decoration: none;
-    transition: border 0.1s ease 0s, box-shadow 0.1s ease 0s, background-color 0.1s ease 0s, opacity 0.1s ease 0s;
+
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
 }
 .global-nav > li > a:hover{
-    color: #FEC63E ;
+    background: #FEC63E ;
+    color: #fff;
 }
 .user-nav{
     position:absolute;
