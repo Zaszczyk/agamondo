@@ -39,11 +39,11 @@ function getPoint() {
             lat2 = lat;
             lon2 = lon;
         }
-        console.log(altitude);
         distance2 = getDistanceFromLatLonInKm(lat2, lon2, lat, lon);
         if(help == 0)
             distance2 = 0.00001;
         help = 1;
+        console.log(distance2);
         if(distance2>0.03)
             console.log("nieporzadany punkt");
         else {
@@ -59,12 +59,14 @@ function getPoint() {
                 if(sub<1)
                     sub = 1;
             speed = distance2 / (sub*0.000277);
-            console.log(speed);
             sub_time2 = sub_time;
         }
         if(speed>max_speed)
             max_speed = speed;
-        distance = distance + getDistanceFromLatLonInKm(lat2, lon2, lat, lon);
+        if(distance2>0.1)
+            distance2=0.001;
+        distance = distance + distance2;/*getDistanceFromLatLonInKm(lat2, lon2, lat, lon);*/
+        console.log(distance);
         if(counter%co_ile_przesiac == 0)
             points.push([distance, speed]);
         alt.push([distance, altitude]);

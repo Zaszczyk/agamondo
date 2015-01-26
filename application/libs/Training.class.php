@@ -8,8 +8,8 @@ class Training{
     public $time;
     public $date;
     public $title;
-    public $activity;
     public $description;
+    public $activity;
 
     public function __construct($xml){/*
         $xml = str_replace('&lt;', '<', $xml);
@@ -67,7 +67,7 @@ class Training{
             }
         }
 
-        if(empty($this->calories))
+        if(empty($this->activity))
             throw new Exception('Plik nie zawiera aktywnośći.');
     }
 
@@ -121,7 +121,7 @@ class Training{
         }
 
         if(empty($this->date))
-            throw new Exception('Plik nie zawiera kalorii.');
+            throw new Exception('Plik nie zawiera daty.');
     }
 
     public function getTitle(){
@@ -134,6 +134,6 @@ class Training{
         if($this->description != null)
             return $this->description;
 
-        return $this->description = 'Opis treningu dodany automatycznie, nie obsługiwany w tej wersji aplikacji';
+        return $this->description = 'Automatyczny pis treningu';
     }
 }
