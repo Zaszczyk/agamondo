@@ -10,6 +10,7 @@ class Training{
     public $title;
     public $description;
     public $activity;
+    public $activity_name;
 
     public function __construct($xml){/*
         $xml = str_replace('&lt;', '<', $xml);
@@ -58,12 +59,14 @@ class Training{
         while ($this->xmlReader->read()) {
             if ($this->xmlReader->nodeType == XMLReader::ELEMENT) {
                 $exp = $this->xmlReader->expand();
-                if ($exp->nodeName == 'Activity Sport="Running"')
-                    return $this->activity = 2;
-                elseif ($exp->nodeName == 'Activity Sport="Biking"')
-                    return $this->activity = 1;
-                else
-                    return $this->activity = 1;
+                if ($exp->nodeName == "Activity")
+                    $activity_name = $exp->getAttribute('Sport');
+                    if($activity_name=="Biking")
+                        return $this->activity = 1;
+                    elseif($activity_name=="Running")
+                        return $this->activity = 2;
+                    else
+                        return $this->activity = 3;
             }
         }
 
