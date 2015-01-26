@@ -60,10 +60,10 @@ class Training{
             if ($this->xmlReader->nodeType == XMLReader::ELEMENT) {
                 $exp = $this->xmlReader->expand();
                 if ($exp->nodeName == "Activity") {
-                    $this->$activity_name = $exp->getAttribute('Sport');
-                    if ($this->$activity_name == "Biking")
+                    $this->activity_name = $exp->getAttribute('Sport');
+                    if ($this->activity_name == "Biking")
                         return $this->activity = 1;
-                    elseif ($this->$activity_name == "Running")
+                    elseif ($this->activity_name == "Running")
                         return $this->activity = 2;
                     else
                         return $this->activity = 3;

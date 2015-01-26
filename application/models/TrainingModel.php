@@ -67,7 +67,7 @@ class TrainingModel extends Model{
         return $query->fetchAll();
     }
 
-    public function addTraining($user_id, $xml, $date, $time, $distance, $calories, $title, $description, $activity)
+    public function addTraining($user_id, $xml, $activity, $date, $time, $distance, $calories, $title, $description)
     {
 
         $sql = "INSERT INTO trainings (user_id, xml, distance, time, calories, date, title, description, activity) VALUES (:user_id, :xml, :distance, :time, :calories, :date, :title, :description, :activity)";

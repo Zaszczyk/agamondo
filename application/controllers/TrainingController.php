@@ -92,7 +92,7 @@ class TrainingController extends Controller{
 
     public function add(){
         error_reporting(E_ALL ^ E_WARNING);
-        ini_set('display_errors', 0);
+        ini_set('display_errors', 1);
         if(isset($_FILES['xml'])){
 
             try{
@@ -105,7 +105,7 @@ class TrainingController extends Controller{
                 $Training = new Training($xml);
 
                 $TrainingModel = $this->loadModel('TrainingModel');
-                $id = $TrainingModel->addTraining($_SESSION['id'], $xml, $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title'], $_POST['description'], $Training->getActivity());
+                $id = $TrainingModel->addTraining($_SESSION['id'], $xml,$Training->getActivity(), $Training->getDate(), $Training->getTime(), $Training->getDistance(), $Training->getCalories(), $_POST['title'], $_POST['description']);
 
                 header('Location: '.Config::PATH.'training/display/'.$id);
             }
